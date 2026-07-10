@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bjqna6o8x1ssf"]
+
+[ext_resource type="Script" uid="uid://c6cisais16676" path="res://breakable_rock.gd" id="1_7f0rj"]
+[ext_resource type="Texture2D" uid="uid://b0ue0u51mrcee" path="res://assets/sprites/tileset1-16.png" id="2_art48"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sj5e7"]
+size = Vector2(16, 8)
+
+[node name="BreakableRock" type="StaticBody2D" unique_id=1226098217]
+y_sort_enabled = true
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_7f0rj")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=685472248]
+texture = ExtResource("2_art48")
+offset = Vector2(0, -8)
+hframes = 10
+vframes = 10
+frame = 52
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=323205665]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_sj5e7")

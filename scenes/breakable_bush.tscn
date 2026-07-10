@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cgc2lb20c5aij"]
+
+[ext_resource type="Script" uid="uid://tm4eqme05nq0" path="res://breakable_bush.gd" id="1_cwgm0"]
+[ext_resource type="Texture2D" uid="uid://ctkv8fa2tsukm" path="res://assets/sprites/bush.png" id="2_y1hj3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sj5e7"]
+size = Vector2(16, 8)
+
+[node name="BreakableBush" type="StaticBody2D" unique_id=1748466605]
+y_sort_enabled = true
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_cwgm0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1094810530]
+position = Vector2(0, -7)
+texture = ExtResource("2_y1hj3")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1945693582]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_sj5e7")

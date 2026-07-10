@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://b40yfxjrmig8e"]
+
+[ext_resource type="Texture2D" uid="uid://dq5scqnc74m2l" path="res://assets/sprites/torch.png" id="1_my26j"]
+[ext_resource type="PackedScene" uid="uid://c3vsltcvkxse2" path="res://scenes/flickering_light.tscn" id="2_o2tjn"]
+
+[sub_resource type="Animation" id="Animation_my26j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_o2tjn"]
+resource_name = "normal"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r3k50"]
+_data = {
+&"RESET": SubResource("Animation_my26j"),
+&"normal": SubResource("Animation_o2tjn")
+}
+
+[node name="Torch" type="Node2D" unique_id=132525163]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=783855221]
+texture = ExtResource("1_my26j")
+hframes = 2
+vframes = 2
+
+[node name="FlickeringLight" parent="." unique_id=1533560009 instance=ExtResource("2_o2tjn")]
+base_energy = 0.75
+flicker_intensity = 0.3
+base_scale = 0.5
+scale_intensity = 0.075
+is_environment_light = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1219250738]
+libraries/ = SubResource("AnimationLibrary_r3k50")
+autoplay = &"normal"

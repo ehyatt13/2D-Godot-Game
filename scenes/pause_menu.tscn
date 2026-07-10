@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://6ft4llukhjlu"]
+
+[ext_resource type="Script" uid="uid://dcvubm6t3a555" path="res://pause_menu.gd" id="1_n87rw"]
+[ext_resource type="Texture2D" uid="uid://cijr3fhconx3u" path="res://assets/sprites/objects.png" id="2_kukqi"]
+[ext_resource type="Texture2D" uid="uid://dq63knsrxra0" path="res://assets/sprites/bomb.png" id="3_5d2l8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q28f4"]
+atlas = ExtResource("2_kukqi")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecfns"]
+atlas = ExtResource("3_5d2l8")
+region = Rect2(0, 0, 16, 16)
+
+[node name="PauseMenu" type="Control" unique_id=1886712646]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_n87rw")
+
+[node name="BackgroundBlur" type="ColorRect" parent="." unique_id=259856812]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.39215687)
+
+[node name="MenuFrame" type="PanelContainer" parent="." unique_id=1238533300]
+custom_minimum_size = Vector2(1000, 600)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuFrame" unique_id=1480916848]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="MenuFrame/VBoxContainer" unique_id=523691952]
+layout_mode = 2
+text = "INVENTORY"
+
+[node name="StatsHBox" type="HBoxContainer" parent="MenuFrame/VBoxContainer" unique_id=1030304703]
+layout_mode = 2
+
+[node name="CoinContainer" type="HBoxContainer" parent="MenuFrame/VBoxContainer/StatsHBox" unique_id=1364913659]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="CoinIcon" type="TextureRect" parent="MenuFrame/VBoxContainer/StatsHBox/CoinContainer" unique_id=1365671739]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = SubResource("AtlasTexture_q28f4")
+stretch_mode = 5
+
+[node name="CoinLabel" type="Label" parent="MenuFrame/VBoxContainer/StatsHBox/CoinContainer" unique_id=1092552761]
+layout_mode = 2
+text = "0"
+
+[node name="BombContainer" type="HBoxContainer" parent="MenuFrame/VBoxContainer/StatsHBox" unique_id=87214421]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="BombIcon" type="TextureRect" parent="MenuFrame/VBoxContainer/StatsHBox/BombContainer" unique_id=1704655238]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = SubResource("AtlasTexture_ecfns")
+stretch_mode = 5
+
+[node name="BombLabel" type="Label" parent="MenuFrame/VBoxContainer/StatsHBox/BombContainer" unique_id=1605624079]
+layout_mode = 2
+text = "0"
+
+[node name="WeaponGrid" type="GridContainer" parent="MenuFrame/VBoxContainer" unique_id=1212251345]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 4

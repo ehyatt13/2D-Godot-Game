@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://bgv3vgp1aec4d"]
+
+[ext_resource type="Script" uid="uid://bsg8m0m51dkam" path="res://bomb.gd" id="1_4kkau"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vpdcx"]
+load_path = "res://.godot/imported/bomb.png-582a23d1dce9175afe43059a30aaded8.ctex"
+
+[sub_resource type="Animation" id="Animation_j15uc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_84slv"]
+resource_name = "fuse_tick"
+length = 3.5000000000000004
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 3, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5, 2, 2.5, 2.7, 2.8, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"trigger_explosion"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nxi8k"]
+_data = {
+&"RESET": SubResource("Animation_j15uc"),
+&"fuse_tick": SubResource("Animation_84slv")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sj5e7"]
+
+[node name="Bomb" type="Node2D" unique_id=278678096]
+y_sort_enabled = true
+script = ExtResource("1_4kkau")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=567573405]
+modulate = Color(1, 0, 0, 1)
+texture = SubResource("CompressedTexture2D_vpdcx")
+hframes = 3
+vframes = 2
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=818290946]
+libraries/ = SubResource("AnimationLibrary_nxi8k")
+
+[node name="ExplosionRadius" type="Area2D" parent="." unique_id=904263510]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionRadius" unique_id=1375350081]
+shape = SubResource("CircleShape2D_sj5e7")

@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://ucg86bqpdr4m"]
+
+[ext_resource type="Script" uid="uid://cjtn8qpqrpjlu" path="res://switch.gd" id="1_e08h5"]
+[ext_resource type="Texture2D" uid="uid://b5y1xmqsve0qm" path="res://assets/sprites/chests.png" id="2_nnoiq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sj5e7"]
+radius = 5.0
+
+[node name="Switch" type="Node2D" unique_id=2028142053]
+z_index = -1
+script = ExtResource("1_e08h5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=72765155]
+texture = ExtResource("2_nnoiq")
+offset = Vector2(0, -8)
+hframes = 5
+vframes = 5
+frame = 8
+
+[node name="Interaction Zone" type="Area2D" parent="." unique_id=1687813686]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction Zone" unique_id=792200630]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_sj5e7")
+
+[connection signal="body_entered" from="Interaction Zone" to="." method="_on_interaction_zone_body_entered"]

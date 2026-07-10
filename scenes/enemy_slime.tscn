@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://by7n2my30ogas"]
+
+[ext_resource type="Script" uid="uid://8xn4mofkh5ke" path="res://scenes/enemy_slime.gd" id="1_6xinc"]
+[ext_resource type="Texture2D" uid="uid://cxitp6ndyosem" path="res://assets/sprites/slime.png" id="2_khk2i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1trss"]
+size = Vector2(14, 2)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y5ckx"]
+radius = 64.0
+
+[node name="EnemySlime" type="CharacterBody2D" unique_id=1678480407]
+collision_layer = 8
+collision_mask = 13
+motion_mode = 1
+script = ExtResource("1_6xinc")
+speed = 30.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=388933413]
+texture = ExtResource("2_khk2i")
+offset = Vector2(0, -9)
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2055609901]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_1trss")
+
+[node name="DetectionRange" type="Area2D" parent="." unique_id=1245766424]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange" unique_id=2129499964]
+shape = SubResource("CircleShape2D_y5ckx")
