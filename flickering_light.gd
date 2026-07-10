@@ -25,7 +25,6 @@ var time_passed: float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#pass # Replace with function body.
 	if is_environment_light:
 		enabled = true
 		return
@@ -46,7 +45,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	#pass
 	if enabled:
 		time_passed += delta * flicker_speed
 		var flicker_wave: float = sin(time_passed) + sin(time_passed * 0.7) + cos(time_passed * 1.5)

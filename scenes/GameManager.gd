@@ -7,7 +7,6 @@ var current_level_node: Node2D = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#pass # Replace with function body.
 	change_level("res://scenes/test_island_level.tscn", Vector2(0.0, 0.0))
 
 func change_level(level_path: String, spawn_position: Vector2) -> void:

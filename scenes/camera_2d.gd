@@ -21,14 +21,10 @@ var max_shake_offset: float = 15.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#pass # Replace with function body.
 	if target_map:
 		_calculate_dynamic_bounds()
 	else:
 		_apply_manual_bounds()
-	
-	#if player_target:
-	#	global_position = player_target.global_position
 	
 	position_smoothing_enabled = true
 	position_smoothing_speed = 2.0
@@ -52,14 +48,7 @@ func _calculate_dynamic_bounds() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	#pass
 	if player_target:
-		#var target_position: Vector2 = player_target.global_position
-		
-		#var new_position = global_position.lerp(target_position, smooth_speed * delta)
-		
-		#global_position = new_position.round()
-		
 		global_position = player_target.global_position
 	
 	if shake_intensity > 0.0:

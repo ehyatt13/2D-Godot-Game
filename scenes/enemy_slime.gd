@@ -1,9 +1,5 @@
 extends CharacterBody2D
 
-
-#const SPEED = 300.0
-#const JUMP_VELOCITY = -400.0
-
 @export var speed: float = 50.0
 @export var max_health: int = 3
 
@@ -82,15 +78,6 @@ func take_damage(amount: int) -> void:
 	else:
 		print("Error: Slime could not locate the Player node in the world tree hierarchy!")
 	
-	#var player_node = get_tree().current_scene.get_node_or_null("Game/World")
-	#if player_node: 
-		#var live_player = get_tree().get_first_node_in_group("Player") or get_parent().get_node_or_null("PLayer")
-		#if live_player:
-			#var push_direction: Vector2 = (global_position - live_player.global_position).normalized()
-			#
-			#is_stunned = true
-			#knockback_velocity = push_direction * 800.0
-	
 	if health <= 0:
 		print("Slime was defeated!")
 		ItemDatabase.spawn_loot_drop("enemy_slime", global_position)
@@ -113,21 +100,3 @@ func _on_player_lost(body: Node2D) -> void:
 	if body == player_target:
 		player_target = null
 		print("Player escaped slime sight lines.")
-	
-	## Add the gravity.
-	#if not is_on_floor():
-		#velocity += get_gravity() * delta
-#
-	## Handle jump.
-	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		#velocity.y = JUMP_VELOCITY
-#
-	## Get the input direction and handle the movement/deceleration.
-	## As good practice, you should replace UI actions with custom gameplay actions.
-	#var direction := Input.get_axis("ui_left", "ui_right")
-	#if direction:
-		#velocity.x = direction * SPEED
-	#else:
-		#velocity.x = move_toward(velocity.x, 0, SPEED)
-#
-	#move_and_slide()

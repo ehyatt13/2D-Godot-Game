@@ -6,13 +6,11 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#pass # Replace with function body.
 	anim_player.play("fuse_tick")
 
 func trigger_explosion() -> void:
 	print("BOOM!")
 	
-	#particle effect or screen shake
 	var root_node = get_tree().root
 	var game_manager = root_node.get_node_or_null("Game")
 	if game_manager:

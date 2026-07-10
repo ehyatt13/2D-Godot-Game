@@ -8,15 +8,11 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#pass # Replace with function body.
 	locked_chest.is_locked = true
 	locked_chest.visible = false
 	locked_chest.is_hidden = true
 	locked_chest.set_collision_layer_value(4, false)
-	
 	floor_switch.activated.connect(_switch_activated)
-	
-	#test_torch_light.blend_mode = Light2D.BLEND_MODE_MIX
 
 func _switch_activated() -> void:
 	print("A secret chest appeared!")

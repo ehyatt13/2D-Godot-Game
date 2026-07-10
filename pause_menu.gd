@@ -10,12 +10,10 @@ var last_focused_index: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#pass # Replace with function body.
 	visible = false
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause_game"):
-		#print("Pause")
 		get_viewport().set_input_as_handled()
 		toggle_pause()
 
@@ -44,19 +42,13 @@ func _refresh_menu_display() -> void:
 	var first_button: TextureButton = null
 	
 	for i in range(GlobalPlayerData.selectable_items.size()):
-		var item: ItemData = GlobalPlayerData.selectable_items[i]
-		
-		#var item_slot: Button = Button.new()
-		#item_slot.text = item.display_name
-		#item_slot.custom_minimum_size = Vector2(80, 40)
-		
+		var item: ItemData = GlobalPlayerData.selectable_items[i]	
 		var item_info: Dictionary = ItemDatabase.get_item_data(item.id)
 		if item_info.is_empty():
 			continue
 		
 		var atlas_key: String = item_info["atlas"]
 		var atlas_config: Dictionary = ItemDatabase.ATLAS_SHEETS[atlas_key]
-		
 		var master_texture: Texture2D = load(atlas_config["path"])
 		
 		var cell_width: float = master_texture.get_width() / float(atlas_config["hframes"])
@@ -74,16 +66,12 @@ func _refresh_menu_display() -> void:
 		
 		var item_slot: TextureButton = TextureButton.new()
 		item_slot.texture_normal = item_icon
-		
 		item_slot.custom_minimum_size = Vector2(32, 32)
-		
 		item_slot.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
 		
 		var scale_factor: float = item_info.get("visual_scale", 1.0)
 		item_slot.scale = Vector2(scale_factor, scale_factor)
-		
 		item_slot.process_mode = Node.PROCESS_MODE_INHERIT
-		
 		item_slot.focus_mode = Control.FOCUS_ALL
 		
 		var capture_index: int = i
@@ -97,8 +85,6 @@ func _refresh_menu_display() -> void:
 				get_viewport().set_input_as_handled()
 				
 				_on_item_slot_selected(capture_index))
-		
-		#item_slot.pressed.connect(func(): _on_item_slot_selected(capture_index))
 		
 		if item_info.has("target_stat"):
 			var stat_name: String = item_info["target_stat"]
@@ -115,7 +101,6 @@ func _refresh_menu_display() -> void:
 			item_slot.add_child(ammo_label)
 		
 		if i == GlobalPlayerData.equipped_item_index:
-			#item_slot.modulate = Color(0.5, 1.0, 0.5, 1.0)
 			var outline_frame: ReferenceRect = ReferenceRect.new()
 			
 			outline_frame.border_color = Color(0.2, 1.0, 0.3, 1.0)
@@ -127,8 +112,6 @@ func _refresh_menu_display() -> void:
 			item_slot.add_child(outline_frame)
 		else:
 			item_slot.modulate = Color.WHITE
-		
-		#item_slot.pressed.connect(func(): _on_item_slot_selected(i))
 		
 		weapon_grid.add_child(item_slot)
 		
@@ -145,12 +128,6 @@ func _refresh_menu_display() -> void:
 		
 		if target_button and target_button is TextureButton:
 			target_button.call_deferred("grab_focus")
-	
-	#if first_button != null:
-		#first_button.call_deferred("grab_focus")
-		#await get_tree().process_frame
-		#if visible:
-			#first_button.grab_focus()
 
 func _on_item_slot_selected(index: int) -> void:
 	GlobalPlayerData.equipped_item_index = index
