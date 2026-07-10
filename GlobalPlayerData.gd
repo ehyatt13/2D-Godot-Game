@@ -1,6 +1,7 @@
 extends Node
 
 signal health_changed(current_health: int, max_health: int)
+signal coins_changed(current_coins: int)
 
 signal atmosphere_changed(preset_index: int)
 
@@ -22,7 +23,8 @@ var health: int = max_health:
 var gold_coins: int = 0:
 	set(value):
 		gold_coins = clamp(value, 0, 999)
-		print("Coins Updated: ", gold_coins)
+		coins_changed.emit(gold_coins)
+		#print("Coins Updated: ", gold_coins)
 
 var bombs: int = 0:
 	set(value):
@@ -53,13 +55,13 @@ func receive_item(item_id: String, quantity: int) -> void:
 	
 	match behavior:
 		"automatic":
-			var target_stat: String = item_info["target_stat"]
-			if target_stat in self:
-				self[target_stat] += quantity
-			
 			if item_id == "gold_coin" and not flags["discovered_coins"]:
 				flags["discovered_coins"] = true
 				print("UI Alert: Coins revealed via global flags dictionary!")
+			
+			var target_stat: String = item_info["target_stat"]
+			if target_stat in self:
+				self[target_stat] += quantity
 		
 		"flag":
 			var target_flag: String = item_info["target_flag"]
@@ -68,14 +70,14 @@ func receive_item(item_id: String, quantity: int) -> void:
 				print("Progression Flag Flipped: ", target_flag, " is now TRUE")
 		
 		"selectable":
+			if item_id == "bomb" and not flags["discovered_bombs"]:
+				flags["discovered_bombs"] = true
+				print("UI Alert: Bombs revealed via global flags dictionary!")
+			
 			if item_info.has("target_stat"):
 				var stat_name: String = item_info["target_stat"]
 				if stat_name in self:
 					self[stat_name] += quantity
-			
-			if item_id == "bomb" and not flags["discovered_bombs"]:
-				flags["discovered_bombs"] = true
-				print("UI Alert: Bombs revealed via global flags dictionary!")
 			
 			var already_owned: bool = false
 			for owned_item in selectable_items:

@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cog7o4xfgoi5o"]
+
+[ext_resource type="Script" uid="uid://c560ctbjviw0e" path="res://coin_hud.gd" id="1_xd6th"]
+[ext_resource type="Texture2D" uid="uid://cijr3fhconx3u" path="res://assets/sprites/objects.png" id="2_0pmbc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fh57"]
+atlas = ExtResource("2_0pmbc")
+region = Rect2(32, 0, 16, 16)
+
+[node name="CoinHUD" type="PanelContainer" unique_id=2147129987]
+custom_minimum_size = Vector2(64, 24)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_xd6th")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1931864960]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1346765031]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="CoinIcon" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=1145571607]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = SubResource("AtlasTexture_0fh57")
+stretch_mode = 5
+
+[node name="CoinLabel" type="Label" parent="MarginContainer/HBoxContainer" unique_id=529444367]
+layout_mode = 2
+text = "0"

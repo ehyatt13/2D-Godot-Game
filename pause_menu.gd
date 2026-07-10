@@ -11,6 +11,7 @@ var last_focused_index: int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visible = false
+	GlobalPlayerData.coins_changed.connect(func(amt): _refresh_menu_display())
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause_game"):

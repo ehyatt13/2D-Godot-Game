@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://3jli701nw2sb" path="res://scenes/GameManager.gd" id="1_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://6ft4llukhjlu" path="res://scenes/pause_menu.tscn" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bxa1ayf4xdyjv" path="res://scenes/heart_ui.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://cog7o4xfgoi5o" path="res://scenes/coin_hud.tscn" id="4_lbhrr"]
 
 [node name="Game" type="Node2D" unique_id=469100526]
 script = ExtResource("1_0tnpc")
@@ -16,5 +17,15 @@ offset_left = 16.0
 offset_top = 16.0
 offset_right = 72.0
 offset_bottom = 32.0
+
+[node name="CoinHUD" parent="CanvasLayer" unique_id=2147129987 instance=ExtResource("4_lbhrr")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -56.0
+offset_right = 80.0
+offset_bottom = -16.0
+grow_vertical = 0
 
 [node name="World" type="Node2D" parent="." unique_id=260470708]
