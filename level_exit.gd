@@ -14,8 +14,3 @@ func _on_body_entered(body: Node2D) -> void:
 		var game_manager = get_tree().root.get_node_or_null("Game")
 		if game_manager:
 			game_manager.change_level(target_level_path, spawn_coordinates)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

@@ -63,7 +63,3 @@ func _on_player_walked_over(body: Node2D) -> void:
 		#pickup sound or effects
 		
 		queue_free()
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

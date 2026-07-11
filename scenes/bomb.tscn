@@ -98,7 +98,7 @@ libraries/ = SubResource("AnimationLibrary_nxi8k")
 
 [node name="ExplosionRadius" type="Area2D" parent="." unique_id=904263510]
 collision_layer = 0
-collision_mask = 8
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionRadius" unique_id=1375350081]
 shape = SubResource("CircleShape2D_sj5e7")

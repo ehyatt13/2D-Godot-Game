@@ -19,7 +19,3 @@ func take_damage(amount: int) -> void:
 	sprite.frame = frame_cut
 	$"CollisionShape2D".disabled = true
 	ItemDatabase.spawn_loot_drop("breakable_bush", global_position)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

@@ -32,7 +32,3 @@ func _apply_atmosphere() -> void:
 			
 			if "GlobalPlayerData" in Engine.get_main_loop().root:
 				GlobalPlayerData.atmosphere_changed.emit(lighting_preset)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

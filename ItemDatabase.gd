@@ -166,8 +166,3 @@ func spawn_loot_drop(table_id: String, world_coordinates: Vector2) -> void:
 		#print("Loot Engine: Success! 'light_gradient.png' has been baked and saved to your project assets folder.")
 	#else:
 		#print("Loot Engine Error: Could not compile PNG asset file. Error code: ", save_error)
-#
-#
-## Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-	#pass

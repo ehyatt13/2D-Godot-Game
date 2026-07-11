@@ -34,7 +34,3 @@ func _get_initial_position() -> void:
 			$Sprite2D.frame = 2
 		else:
 			$Sprite2D.frame = 0
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

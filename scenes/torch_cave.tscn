@@ -1,13 +1,11 @@
 [gd_scene format=3 uid="uid://xu1n23okxv7k"]
 
 [ext_resource type="PackedScene" uid="uid://bgw0tkuq44kfi" path="res://scenes/base_indoor_level.tscn" id="1_2qmcq"]
-[ext_resource type="Script" uid="uid://bgvy04qa2120q" path="res://scenes/torch_cave.gd" id="2_mm5i4"]
 [ext_resource type="PackedScene" uid="uid://b40yfxjrmig8e" path="res://scenes/torch.tscn" id="2_y7xr0"]
 [ext_resource type="PackedScene" uid="uid://dl123gaomvfc8" path="res://scenes/chest.tscn" id="4_y7xr0"]
 [ext_resource type="PackedScene" uid="uid://bq6d3jb2gadow" path="res://scenes/level_exit.tscn" id="5_mm5i4"]
 
 [node name="TorchCave" unique_id=1375161342 instance=ExtResource("1_2qmcq")]
-script = ExtResource("2_mm5i4")
 
 [node name="Camera2D" parent="." index="0" unique_id=1910060549 node_paths=PackedStringArray("target_map")]
 target_map = NodePath("../WaterLayer")

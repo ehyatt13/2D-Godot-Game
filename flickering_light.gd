@@ -31,16 +31,6 @@ func _ready() -> void:
 	
 	if "GlobalPlayerData" in Engine.get_main_loop().root:
 		GlobalPlayerData.atmosphere_changed.connect(_on_world_lighting_updated)
-	
-	#var current_preset = 0
-	#var current_scene = get_tree().current_scene
-	#
-	#if current_scene and current_scene.get_child_count() > 0:
-		#var parent_map = get_tree().current_scene.get_child(0)
-		#var modulator = parent_map.get_node_or_null("CanvasModulate") if parent_map else null
-		#if modulator and "lighting_preset" in modulator:
-			#current_preset = modulator.lighting_preset
-	#_on_world_lighting_updated(current_preset)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

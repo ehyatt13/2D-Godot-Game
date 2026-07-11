@@ -65,7 +65,3 @@ func _apply_baseline_layout_position() -> void:
 		global_position.y = target_show_y
 	else:
 		global_position.y = target_hide_y
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

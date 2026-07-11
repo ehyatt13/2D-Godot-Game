@@ -277,7 +277,3 @@ func _deliver_loot() -> void:
 	#if body is CharacterBody2D and body.name == "Player":
 		#player_in_range = false
 		#player_facing_chest = false
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

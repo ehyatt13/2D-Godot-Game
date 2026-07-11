@@ -141,7 +141,3 @@ func _on_slot_focused(slot_node: TextureButton) -> void:
 
 func _on_slot_focus_lost(slot_node: TextureButton, index: int) -> void:
 	slot_node.self_modulate = Color(1.0, 1.0, 1.0, 1.0)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

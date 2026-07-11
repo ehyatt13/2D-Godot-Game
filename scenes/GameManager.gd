@@ -40,7 +40,3 @@ func change_level(level_path: String, spawn_position: Vector2) -> void:
 			var player_light = player_instance.get_node_or_null("PointLight2D")
 			if player_light and player_light.has_method("force_initial_preset"):
 				player_light.force_initial_preset(modulator.lighting_preset)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

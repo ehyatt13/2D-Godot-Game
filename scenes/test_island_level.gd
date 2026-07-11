@@ -29,8 +29,3 @@ func _switch_activated() -> void:
 	locked_chest.modulate.a = 0.0
 	var tween = create_tween()
 	tween.tween_property(locked_chest, "modulate:a", 1.0, 0.5)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

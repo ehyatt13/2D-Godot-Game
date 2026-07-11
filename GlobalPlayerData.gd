@@ -120,12 +120,3 @@ func unlock_upgrade(flag_name: String) -> void:
 	if flags.has(flag_name):
 		flags[flag_name] = true
 		print("Permanently unlocked upgrade: ", flag_name)
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

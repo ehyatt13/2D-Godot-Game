@@ -29,7 +29,3 @@ func _update_heart_display(current_health: int, max_health: int) -> void:
 			new_heart_slot.texture = texture_empty
 		
 		add_child(new_heart_slot)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
