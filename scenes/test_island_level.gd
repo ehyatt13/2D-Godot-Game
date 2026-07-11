@@ -6,13 +6,17 @@ extends Node2D
 
 @onready var test_torch_light: Node2D = $"Entities/Torch2/FlickeringLight"
 
+@onready var canvas_modulate: CanvasModulate = $CanvasModulate
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	locked_chest.is_locked = true
-	locked_chest.visible = false
-	locked_chest.is_hidden = true
-	locked_chest.set_collision_layer_value(4, false)
+	#locked_chest.is_locked = true
+	#locked_chest.visible = false
+	#locked_chest.is_hidden = true
+	#locked_chest.set_collision_layer_value(4, false)
 	floor_switch.activated.connect(_switch_activated)
+	if GlobalPlayerData.has_upgrade("has_torch"):
+		canvas_modulate.lighting_preset = 2
 
 func _switch_activated() -> void:
 	print("A secret chest appeared!")

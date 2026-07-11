@@ -56,8 +56,13 @@ item_quantity = 2
 chest_size = 1
 
 [node name="Chest2" parent="Interactables" parent_id_path=PackedInt32Array(1975639655) index="1" unique_id=1310473946 instance=ExtResource("3_6w7gs")]
+visible = false
 position = Vector2(96, -32)
+collision_layer = 0
 item_id = "gold_coin"
+is_locked = true
+is_hidden = true
+collision_toggle = false
 frame_closed = 6
 frame_open = 7
 

@@ -20,7 +20,16 @@ enum ChestSize {
 ## If ON, the chest cannot be opened
 @export var is_locked: bool = false
 
-@export var is_hidden: bool = false
+@export var is_hidden: bool = false:
+	set(value):
+		is_hidden = value
+		visible = !value
+		#set_collision_layer_value(4, visible)
+
+@export var collision_toggle: bool = true:
+	set(value):
+		collision_toggle = value
+		set_collision_layer_value(4, collision_toggle)
 
 @export var is_open: bool = false:
 	set(value):
@@ -75,11 +84,11 @@ enum ChestSize {
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var interaction_shape: CollisionShape2D = $"InteractionZone/CollisionShape2D"
 
-@onready var item_reward_sprite: Sprite2D = $"ItemRewardSprite"
+#@onready var item_reward_sprite: Sprite2D = $"ItemRewardSprite"
 
-var player_in_range: bool = false
+#var player_in_range: bool = false
 
-var player_facing_chest: bool = false
+#var player_facing_chest: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -151,7 +160,7 @@ func _recalibrate_physics_hitboxes() -> void:
 		match chest_size:
 			ChestSize.NORMAL:
 				sprite.position = Vector2.ZERO
-				item_reward_sprite.position = Vector2.ZERO
+				#item_reward_sprite.position = Vector2.ZERO
 				shape_template.size = Vector2(16.0, 8.0)
 				collision_shape.position = Vector2(0.0, -4.0)
 				interaction_template.size = Vector2(20.0, 12.0)
@@ -159,23 +168,46 @@ func _recalibrate_physics_hitboxes() -> void:
 				
 			ChestSize.BIG:
 				sprite.position = Vector2(8.0, 0.0)
-				item_reward_sprite.position = Vector2(8.0, 0.0)
+				#item_reward_sprite.position = Vector2(8.0, 0.0)
 				shape_template.size = Vector2(32.0, 8.0)
 				collision_shape.position = Vector2(8.0, -4.0)
 				interaction_template.size = Vector2(36.0, 12.0)
 				interaction_shape.position = Vector2(8.0, -4.0)
 
-func _unhandled_input(event: InputEvent) -> void:
-	if Engine.is_editor_hint():
-		return
+#func _unhandled_input(event: InputEvent) -> void:
+	#if Engine.is_editor_hint():
+		#return
+	#
+	#if event.is_action_pressed("ui_accept") and player_in_range and not is_open:
+		#if is_locked:
+			#print("The chest is locked...")
+			#return
+		#if not player_facing_chest:
+			#print("Please face the chest.")
+			#return
+		#open_chest()
+
+func interact(player_node: CharacterBody2D) -> void:
+	if is_open or Engine.is_editor_hint() or is_locked: return
 	
-	if event.is_action_pressed("ui_accept") and player_in_range and not is_open:
-		if is_locked:
-			print("The chest is locked...")
-			return
-		if not player_facing_chest:
-			print("Please face the chest.")
-			return
+	var player_facing: Vector2 = player_node.current_face_direction
+	var test_interaction_point: Vector2 = player_node.global_position + (player_facing * 8.0)
+	
+	var chest_width: float = 32.0 if (chest_size == ChestSize.BIG) else 16.0
+	
+	var visual_offset_x: float = 8.0 if (chest_size == ChestSize.BIG) else 0.0
+	var min_x: float = global_position.x + visual_offset_x - (chest_width / 2.0)
+	var max_x: float = global_position.x + visual_offset_x + (chest_width / 2.0)
+	
+	var min_y: float = global_position.y - (16.0 / 2.0)
+	var max_y: float = global_position.y + (16.0 / 2.0)
+	
+	var is_pointing_at_chest: bool = (
+	test_interaction_point.x >= min_x and test_interaction_point.x <= max_x and
+	test_interaction_point.y >= min_y and test_interaction_point.y <= max_y
+)
+	
+	if is_pointing_at_chest:
 		open_chest()
 
 func open_chest() -> void:
@@ -272,47 +304,47 @@ func _deliver_loot() -> void:
 	print("Found: ", item_quantity, "x ", clean_name, "!")
 	GlobalPlayerData.receive_item(item_id, item_quantity)
 
-func _on_interaction_zone_body_entered(body: Node2D) -> void:
-	if body is CharacterBody2D and body.name == "Player" and not is_open and not is_hidden and not Engine.is_editor_hint():
-		player_in_range = true
-		print("Press Enter to open the chest.")
-		
-		#var direction_to_chest: Vector2 = (global_position - body.global_position).normalized()
-		
-		
-		var player_facing: Vector2 = body.current_face_direction
-		var test_interaction_point: Vector2 = body.global_position + (player_facing * 8.0)
-		
-		var chest_width: float = 32.0 if (chest_size == ChestSize.BIG) else 16.0
-		
-		var visual_offset_x: float = 8.0 if (chest_size == ChestSize.BIG) else 0.0
-		var min_x: float = global_position.x + visual_offset_x - (chest_width / 2.0)
-		var max_x: float = global_position.x + visual_offset_x + (chest_width / 2.0)
-		
-		var min_y: float = global_position.y - (16.0 / 2.0)
-		var max_y: float = global_position.y + (16.0 / 2.0)
-		
-		var is_pointing_at_chest: bool = (
-		test_interaction_point.x >= min_x and test_interaction_point.x <= max_x and
-		test_interaction_point.y >= min_y and test_interaction_point.y <= max_y
-	)
-		
-		if is_pointing_at_chest:
-			player_facing_chest = true
-		
-		#var alignment_score: float = player_facing.dot(direction_to_chest)
+#func _on_interaction_zone_body_entered(body: Node2D) -> void:
+	#if body is CharacterBody2D and body.name == "Player" and not is_open and not is_hidden and not Engine.is_editor_hint():
+		#player_in_range = true
+		#print("Press Enter to open the chest.")
 		#
-		#if alignment_score > 0.5:
-			##print("Player is facing the chest. Opening lockbox!")
+		##var direction_to_chest: Vector2 = (global_position - body.global_position).normalized()
+		#
+		#
+		#var player_facing: Vector2 = body.current_face_direction
+		#var test_interaction_point: Vector2 = body.global_position + (player_facing * 8.0)
+		#
+		#var chest_width: float = 32.0 if (chest_size == ChestSize.BIG) else 16.0
+		#
+		#var visual_offset_x: float = 8.0 if (chest_size == ChestSize.BIG) else 0.0
+		#var min_x: float = global_position.x + visual_offset_x - (chest_width / 2.0)
+		#var max_x: float = global_position.x + visual_offset_x + (chest_width / 2.0)
+		#
+		#var min_y: float = global_position.y - (16.0 / 2.0)
+		#var max_y: float = global_position.y + (16.0 / 2.0)
+		#
+		#var is_pointing_at_chest: bool = (
+		#test_interaction_point.x >= min_x and test_interaction_point.x <= max_x and
+		#test_interaction_point.y >= min_y and test_interaction_point.y <= max_y
+	#)
+		#
+		#if is_pointing_at_chest:
 			#player_facing_chest = true
-			#open_chest()
-		#else:
-			#print("Interaction Blocked: Player must turn around to face the chest.")
+		#
+		##var alignment_score: float = player_facing.dot(direction_to_chest)
+		##
+		##if alignment_score > 0.5:
+			###print("Player is facing the chest. Opening lockbox!")
+			##player_facing_chest = true
+			##open_chest()
+		##else:
+			##print("Interaction Blocked: Player must turn around to face the chest.")
 
-func _on_interaction_zone_body_exited(body: Node2D) -> void:
-	if body is CharacterBody2D and body.name == "Player":
-		player_in_range = false
-		player_facing_chest = false
+#func _on_interaction_zone_body_exited(body: Node2D) -> void:
+	#if body is CharacterBody2D and body.name == "Player":
+		#player_in_range = false
+		#player_facing_chest = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

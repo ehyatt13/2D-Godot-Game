@@ -27,17 +27,23 @@ var is_jumping: bool = false
 @onready var sword_hitbox: Area2D = $"SwordHitbox"
 @onready var sword_shape: CollisionShape2D = $"SwordHitbox/CollisionShape2D"
 
+@onready var interaction_zone: Area2D = $InteractionZone
+var overlapping_interactables: Array[Node2D] = []
+
 var is_invincible: bool = false
 
 var is_attacking: bool = false
 
 var current_face_direction: Vector2 = Vector2(0, 1)
 
-func _ready() -> void:
+func _ready() -> void:	
 	animation_tree.active = true
 	
 	animation_tree.set("parameters/Idle/blend_position", Vector2(0, 1))
 	animation_tree.set("parameters/Walk/blend_position", Vector2(0, 1))
+	
+	interaction_zone.body_entered.connect(_on_interactable_entered)
+	interaction_zone.body_exited.connect(_on_interactable_exited)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("use_item"):
@@ -45,6 +51,33 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("attack") and not is_attacking:
 		execute_sword_slash()
+	
+	if event.is_action_pressed("ui_accept") and not is_attacking and not get_tree().paused:
+		_process_active_interaction()
+
+func _process_active_interaction() -> void:
+	if overlapping_interactables.is_empty():
+		return
+	
+	var closest_object: Node2D = overlapping_interactables[0]
+	var shortest_distance: float = global_position.distance_to(closest_object.global_position)
+	
+	for obj in overlapping_interactables:
+		var test_dist: float = global_position.distance_to(obj.global_position)
+		if test_dist < shortest_distance:
+			shortest_distance = test_dist
+			closest_object = obj
+	
+	if closest_object.has_method("interact"):
+		closest_object.interact(self)
+
+func _on_interactable_entered(body: Node2D) -> void:
+	if body.has_method("interact") and not overlapping_interactables.has(body):
+		overlapping_interactables.append(body)
+
+func _on_interactable_exited(body: Node2D) -> void:
+	if overlapping_interactables.has(body):
+		overlapping_interactables.erase(body)
 
 func execute_sword_slash() -> void:
 	is_attacking = true
