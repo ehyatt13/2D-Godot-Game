@@ -35,7 +35,8 @@ var flags: Dictionary = {
 	"has_power_glove": false,
 	"island_one_boss_defeated": false,
 	"discovered_coins": false,
-	"discovered_bombs": false
+	"discovered_bombs": false,
+	"has_torch": false
 }
 
 var selectable_items: Array[ItemData] = []
@@ -68,6 +69,26 @@ func receive_item(item_id: String, quantity: int) -> void:
 			if flags.has(target_flag):
 				flags[target_flag] = true
 				print("Progression Flag Flipped: ", target_flag, " is now TRUE")
+				
+				if target_flag == "has_torch":
+					var root_window = get_tree().root
+					var game_manager = root_window.get_node_or_null("Game")
+					
+					if game_manager:
+						var world_container = game_manager.get_node_or_null("World")
+						if world_container and world_container.get_child_count() > 0:
+							var current_level_map = world_container.get_child(0)
+							
+							var modulator = current_level_map.get_node_or_null("CanvasModulate")
+							if modulator and "lighting_preset" in modulator:
+								print("Loot Engine: Torch unlocked! Broadcasting atmosphere shift code.")
+								var player_character = current_level_map.get_node_or_null("Entities/Player")
+								if player_character:
+									var player_light = player_character.get_node_or_null("PointLight2D")
+									if player_light and player_light.has_method("force_initial_preset"):
+										# Force push the active room's dark preset directly to the script!
+										player_light.force_initial_preset(modulator.lighting_preset)
+								atmosphere_changed.emit(modulator.lighting_preset)
 		
 		"selectable":
 			if item_id == "bomb" and not flags["discovered_bombs"]:

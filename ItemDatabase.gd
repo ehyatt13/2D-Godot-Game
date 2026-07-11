@@ -16,6 +16,11 @@ const ATLAS_SHEETS: Dictionary = {
 		"path": "res://assets/sprites/heart.png",
 		"hframes": 3,
 		"vframes": 1
+	},
+	"magic_torch": {
+		"path": "res://assets/sprites/player_torch.png",
+		"hframes": 2,
+		"vframes": 1
 	}
 }
 
@@ -69,6 +74,13 @@ const ITEMS: Dictionary = {
 		"behavior": "selectable",
 		"target_stat": "bombs"
 	},
+	"magic_torch": {
+		"name": "Magic Torch",
+		"frame": 0,
+		"atlas": "magic_torch",
+		"behavior": "flag",
+		"target_flag": "has_torch"
+	}
 }
 
 const LOOT_TABLES: Dictionary = {

@@ -12,7 +12,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sj5e7"]
 shader = ExtResource("6_f20uo")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sbamt"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vs24x"]
 texture = ExtResource("2_f20uo")
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -275,7 +275,7 @@ texture = ExtResource("2_f20uo")
 9:9/0 = 0
 9:9/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jpvne"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eycnh"]
 texture = ExtResource("3_6dy67")
 0:0/0 = 0
 0:0/0/y_sort_origin = 4
@@ -302,7 +302,7 @@ texture = ExtResource("3_6dy67")
 2:3/size_in_atlas = Vector2i(2, 1)
 2:3/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1qmaq"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sbamt"]
 texture = ExtResource("4_vs24x")
 0:0/0 = 0
 1:0/0 = 0
@@ -313,7 +313,7 @@ texture = ExtResource("4_vs24x")
 2:1/0 = 0
 3:1/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m6xcw"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jpvne"]
 texture = ExtResource("5_eycnh")
 0:0/animation_columns = 2
 0:0/animation_frame_0/duration = 1.0
@@ -332,12 +332,13 @@ physics_layer_1/collision_mask = 0
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
-sources/0 = SubResource("TileSetAtlasSource_sbamt")
-sources/1 = SubResource("TileSetAtlasSource_jpvne")
-sources/2 = SubResource("TileSetAtlasSource_1qmaq")
-sources/3 = SubResource("TileSetAtlasSource_m6xcw")
+sources/0 = SubResource("TileSetAtlasSource_vs24x")
+sources/1 = SubResource("TileSetAtlasSource_eycnh")
+sources/2 = SubResource("TileSetAtlasSource_sbamt")
+sources/3 = SubResource("TileSetAtlasSource_jpvne")
 
 [node name="BaseLevel" type="Node2D" unique_id=83210981]
+y_sort_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=170677104]
 zoom = Vector2(6, 6)

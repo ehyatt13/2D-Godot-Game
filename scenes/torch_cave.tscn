@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://xu1n23okxv7k"]
+
+[ext_resource type="PackedScene" uid="uid://bgw0tkuq44kfi" path="res://scenes/base_indoor_level.tscn" id="1_2qmcq"]
+[ext_resource type="Script" uid="uid://bgvy04qa2120q" path="res://scenes/torch_cave.gd" id="2_mm5i4"]
+[ext_resource type="PackedScene" uid="uid://b40yfxjrmig8e" path="res://scenes/torch.tscn" id="2_y7xr0"]
+[ext_resource type="PackedScene" uid="uid://dl123gaomvfc8" path="res://scenes/chest.tscn" id="4_y7xr0"]
+[ext_resource type="PackedScene" uid="uid://bq6d3jb2gadow" path="res://scenes/level_exit.tscn" id="5_mm5i4"]
+
+[node name="TorchCave" unique_id=1375161342 instance=ExtResource("1_2qmcq")]
+script = ExtResource("2_mm5i4")
+
+[node name="Camera2D" parent="." index="0" unique_id=1910060549 node_paths=PackedStringArray("target_map")]
+target_map = NodePath("../WaterLayer")
+
+[node name="ObjectLayer" parent="." index="3" unique_id=1511210133]
+tile_map_data = PackedByteArray(0, 0, 255, 255, 2, 0, 0, 0, 9, 0, 2, 0, 0, 0)
+
+[node name="Torch" parent="Entities" parent_id_path=PackedInt32Array(225215360) index="0" unique_id=132525163 instance=ExtResource("2_y7xr0")]
+position = Vector2(-32, -72)
+type = 1
+
+[node name="Torch2" parent="Entities" parent_id_path=PackedInt32Array(225215360) index="1" unique_id=1274220574 instance=ExtResource("2_y7xr0")]
+position = Vector2(192, -88)
+type = 1
+flip = true
+
+[node name="Torch3" parent="Entities" parent_id_path=PackedInt32Array(225215360) index="2" unique_id=1964480190 instance=ExtResource("2_y7xr0")]
+position = Vector2(16, -16)
+type = 1
+flip = true
+
+[node name="Torch4" parent="Entities" parent_id_path=PackedInt32Array(225215360) index="3" unique_id=1871915757 instance=ExtResource("2_y7xr0")]
+position = Vector2(128, -176)
+type = 1
+
+[node name="Chest" parent="Interactables" parent_id_path=PackedInt32Array(681838472) index="0" unique_id=1107813732 instance=ExtResource("4_y7xr0")]
+position = Vector2(152, -184)
+item_id = "magic_torch"
+chest_size = 1
+
+[node name="LevelExit" parent="Interactables" parent_id_path=PackedInt32Array(681838472) index="1" unique_id=1439442201 instance=ExtResource("5_mm5i4")]
+position = Vector2(-8, 40)
+target_level_path = "uid://ckp265jkspsss"
+spawn_coordinates = Vector2(184, -24)
+
+[node name="CanvasModulate" parent="." index="6" unique_id=822277979]
+color = Color(0, 0, 0, 1)
+lighting_preset = 3

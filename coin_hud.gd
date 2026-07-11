@@ -15,7 +15,7 @@ var active_tween: Tween = null
 var current_hide_timer: SceneTreeTimer = null
 
 @onready var target_show_y: float = global_position.y
-@onready var target_hide_y: float = target_show_y + 50.0
+@onready var target_hide_y: float = target_show_y + 60.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

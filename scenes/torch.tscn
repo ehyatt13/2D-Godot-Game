@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b40yfxjrmig8e"]
 
 [ext_resource type="Texture2D" uid="uid://dq5scqnc74m2l" path="res://assets/sprites/torch.png" id="1_my26j"]
+[ext_resource type="Script" uid="uid://cmujceens1isp" path="res://scenes/torch.gd" id="1_o2tjn"]
 [ext_resource type="PackedScene" uid="uid://c3vsltcvkxse2" path="res://scenes/flickering_light.tscn" id="2_o2tjn"]
 
 [sub_resource type="Animation" id="Animation_my26j"]
@@ -19,7 +20,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_o2tjn"]
-resource_name = "normal"
+resource_name = "standing_flicker"
 length = 0.3
 loop_mode = 1
 tracks/0/type = "value"
@@ -35,13 +36,32 @@ tracks/0/keys = {
 "values": [0, 1]
 }
 
+[sub_resource type="Animation" id="Animation_r3k50"]
+resource_name = "wall_flicker"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r3k50"]
 _data = {
 &"RESET": SubResource("Animation_my26j"),
-&"normal": SubResource("Animation_o2tjn")
+&"standing_flicker": SubResource("Animation_o2tjn"),
+&"wall_flicker": SubResource("Animation_r3k50")
 }
 
 [node name="Torch" type="Node2D" unique_id=132525163]
+script = ExtResource("1_o2tjn")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=783855221]
 texture = ExtResource("1_my26j")
@@ -57,4 +77,3 @@ is_environment_light = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1219250738]
 libraries/ = SubResource("AnimationLibrary_r3k50")
-autoplay = &"normal"
