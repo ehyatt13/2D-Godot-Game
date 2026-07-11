@@ -79,7 +79,8 @@ const ITEMS: Dictionary = {
 		"frame": 0,
 		"atlas": "magic_torch",
 		"behavior": "flag",
-		"target_flag": "has_torch"
+		"target_flag": "has_torch",
+		"animation_name": "torch_flicker"
 	}
 }
 
@@ -148,7 +149,23 @@ func spawn_loot_drop(table_id: String, world_coordinates: Vector2) -> void:
 
 ## Called when the node enters the scene tree for the first time.
 #func _ready() -> void:
-	#pass # Replace with function body.
+	##pass # Replace with function body.
+	#var dynamic_texture: GradientTexture2D = GradientTexture2D.new()
+	#dynamic_texture.width = 64
+	#dynamic_texture.height = 64
+	#dynamic_texture.fill = GradientTexture2D.FILL_RADIAL
+	#dynamic_texture.fill_from = Vector2(0.5, 0.5)
+	#dynamic_texture.fill_to = Vector2(0.5, 1.0)
+	#var grad: Gradient = Gradient.new()
+	#grad.set_color(0, Color(1.0, 1.0, 1.0, 1.0)) # Center is solid white
+	#grad.set_color(1, Color(1.0, 1.0, 1.0, 0.0)) # Edge fades to transparent alpha 0
+	#dynamic_texture.gradient = grad
+	#var baked_image: Image = dynamic_texture.get_image()
+	#var save_error = baked_image.save_png("res://assets/lighting/light_gradient.png")
+	#if save_error == OK:
+		#print("Loot Engine: Success! 'light_gradient.png' has been baked and saved to your project assets folder.")
+	#else:
+		#print("Loot Engine Error: Could not compile PNG asset file. Error code: ", save_error)
 #
 #
 ## Called every frame. 'delta' is the elapsed time since the previous frame.

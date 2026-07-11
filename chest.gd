@@ -79,9 +79,11 @@ enum ChestSize {
 
 var player_in_range: bool = false
 
+var player_facing_chest: bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_update_chest_item_visuals()
+	#_update_chest_item_visuals()
 	_update_chest_state()
 
 func _update_chest_state() -> void:
@@ -115,23 +117,23 @@ func _update_chest_sprite_visuals() -> void:
 		#sprite.region_enabled = false
 		#sprite.frame = current_frame_index
 
-func _update_chest_item_visuals() -> void:
-	if is_inside_tree() and has_node("ItemRewardSprite"):
-		var item_data: Dictionary = ItemDatabase.get_item_data(item_id)
-		if not item_data.is_empty():
-			var atlas_key: String = item_data["atlas"]
-			if ItemDatabase.ATLAS_SHEETS.has(atlas_key):
-				var atlas_config: Dictionary = ItemDatabase.ATLAS_SHEETS[atlas_key]
-				var sheet_path: String = atlas_config["path"]
-				if ResourceLoader.exists(sheet_path):
-					$ItemRewardSprite.hframes = atlas_config["hframes"]
-					$ItemRewardSprite.vframes = atlas_config["vframes"]
-					$ItemRewardSprite.texture = load(sheet_path)
-			$"ItemRewardSprite".frame = item_data["frame"]
-			var scale_factor: float = item_data.get("visual_scale", 1.0)
-			$"ItemRewardSprite".scale = Vector2(scale_factor, scale_factor)
-		else:
-			$"ItemRewardSprite".frame = 0
+#func _update_chest_item_visuals() -> void:
+	#if is_inside_tree() and has_node("ItemRewardSprite"):
+		#var item_data: Dictionary = ItemDatabase.get_item_data(item_id)
+		#if not item_data.is_empty():
+			#var atlas_key: String = item_data["atlas"]
+			#if ItemDatabase.ATLAS_SHEETS.has(atlas_key):
+				#var atlas_config: Dictionary = ItemDatabase.ATLAS_SHEETS[atlas_key]
+				#var sheet_path: String = atlas_config["path"]
+				#if ResourceLoader.exists(sheet_path):
+					#$ItemRewardSprite.hframes = atlas_config["hframes"]
+					#$ItemRewardSprite.vframes = atlas_config["vframes"]
+					#$ItemRewardSprite.texture = load(sheet_path)
+			#$"ItemRewardSprite".frame = item_data["frame"]
+			#var scale_factor: float = item_data.get("visual_scale", 1.0)
+			#$"ItemRewardSprite".scale = Vector2(scale_factor, scale_factor)
+		#else:
+			#$"ItemRewardSprite".frame = 0
 
 func _recalibrate_physics_hitboxes() -> void:
 	if not is_inside_tree() or not collision_shape or not interaction_shape: return
@@ -171,6 +173,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		if is_locked:
 			print("The chest is locked...")
 			return
+		if not player_facing_chest:
+			print("Please face the chest.")
+			return
 		open_chest()
 
 func open_chest() -> void:
@@ -184,19 +189,79 @@ func open_chest() -> void:
 	#$"CollisionShape2D".disabled = true
 
 func _spawn_loot_popup_visuals() -> void:
-	item_reward_sprite.visible = true
-	item_reward_sprite.z_as_relative = false
-	item_reward_sprite.z_index = 1
+	#item_reward_sprite.visible = true
+	#item_reward_sprite.z_as_relative = false
+	#item_reward_sprite.z_index = 1
+	#
+	#var tween: Tween = create_tween().set_parallel(true)
+	#
+	#var target_y: float = global_position.y - 24.0
+	#tween.tween_property(item_reward_sprite, "global_position:y", target_y, 0.6).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	#tween.tween_property(item_reward_sprite, "modulate:a", 1.0, 0.4)
+	#tween.set_parallel(false)
+	#tween.tween_interval(1.0)
+	#tween.tween_property(item_reward_sprite, "modulate:a", 0.0, 0.3)
 	
-	var tween: Tween = create_tween()
-	tween.set_parallel(true)
+	var floating_container: Node2D = Node2D.new()
+	if chest_size == ChestSize.NORMAL:
+		floating_container.global_position = global_position + Vector2(0.0, -8.0)
+	else:
+		floating_container.global_position = global_position + Vector2(8.0, -8.0)
 	
-	var target_y: float = global_position.y - 24.0
-	tween.tween_property(item_reward_sprite, "global_position:y", target_y, 0.6).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tween.tween_property(item_reward_sprite, "modulate:a", 1.0, 0.4)
-	tween.set_parallel(false)
-	tween.tween_interval(1.0)
-	tween.tween_property(item_reward_sprite, "modulate:a", 0.0, 0.3)
+	floating_container.top_level = true
+	
+	var item_info: Dictionary = ItemDatabase.get_item_data(item_id)
+	if item_info.is_empty(): return
+	
+	var scale_factor: float = item_info.get("visual_scale", 1.0)
+	floating_container.scale = Vector2(scale_factor, scale_factor)
+	
+	var anim_name: String = item_info.get("animation_name", "")
+	var shared_frames = load("res://assets/items/item_animations.tres")
+	if anim_name != "" and shared_frames:
+		var moving_sprite: AnimatedSprite2D = AnimatedSprite2D.new()
+		
+		moving_sprite.sprite_frames = shared_frames
+		
+		floating_container.add_child(moving_sprite)
+		moving_sprite.play(anim_name)
+	else:
+		var fallback_sprite: Sprite2D = Sprite2D.new()
+		var atlas_config = ItemDatabase.ATLAS_SHEETS[item_info["atlas"]]
+		fallback_sprite.texture = load(atlas_config["path"])
+		fallback_sprite.hframes = atlas_config["hframes"]
+		fallback_sprite.vframes = atlas_config["vframes"]
+		fallback_sprite.frame = item_info["frame"]
+		floating_container.add_child(fallback_sprite)
+	
+	if item_id == "magic_torch":
+		var reward_light: PointLight2D = PointLight2D.new()
+		reward_light.texture = load("res://assets/lighting/light_gradient.png")
+		reward_light.color = Color(1.0, 0.6, 0.3, 1.0)
+		var flicker_script = load("res://flickering_light.gd")
+		reward_light.set_script(flicker_script)
+		reward_light.is_environment_light = true
+		reward_light.base_energy = 0.8
+		floating_container.add_child(reward_light)
+	
+	var world_container = get_tree().root.get_node_or_null("Game/World")
+	if world_container and world_container.get_child_count() > 0:
+		world_container.get_child(0).get_node("Interactables").add_child(floating_container)
+	
+	var target_y: float = floating_container.position.y - 16.0
+	var tween = create_tween().set_parallel(true)
+	tween.tween_property(floating_container, "position:y", target_y, 0.6).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	
+	var baseline_scale = floating_container.scale
+	floating_container.scale = baseline_scale * 0.5
+	tween.tween_property(floating_container, "scale", baseline_scale, 0.4)
+	
+	await get_tree().create_timer(1.5).timeout
+	
+	var fade_tween = create_tween()
+	fade_tween.tween_property(floating_container, "modulate:a", 0.0, 0.3)
+	await fade_tween.finished
+	floating_container.queue_free()
 
 func _deliver_loot() -> void:
 	var clean_name: String = item_id
@@ -208,13 +273,46 @@ func _deliver_loot() -> void:
 	GlobalPlayerData.receive_item(item_id, item_quantity)
 
 func _on_interaction_zone_body_entered(body: Node2D) -> void:
-	if body is CharacterBody2D and body.name == "Player" and not is_open and not is_hidden:
+	if body is CharacterBody2D and body.name == "Player" and not is_open and not is_hidden and not Engine.is_editor_hint():
 		player_in_range = true
 		print("Press Enter to open the chest.")
+		
+		#var direction_to_chest: Vector2 = (global_position - body.global_position).normalized()
+		
+		
+		var player_facing: Vector2 = body.current_face_direction
+		var test_interaction_point: Vector2 = body.global_position + (player_facing * 8.0)
+		
+		var chest_width: float = 32.0 if (chest_size == ChestSize.BIG) else 16.0
+		
+		var visual_offset_x: float = 8.0 if (chest_size == ChestSize.BIG) else 0.0
+		var min_x: float = global_position.x + visual_offset_x - (chest_width / 2.0)
+		var max_x: float = global_position.x + visual_offset_x + (chest_width / 2.0)
+		
+		var min_y: float = global_position.y - (16.0 / 2.0)
+		var max_y: float = global_position.y + (16.0 / 2.0)
+		
+		var is_pointing_at_chest: bool = (
+		test_interaction_point.x >= min_x and test_interaction_point.x <= max_x and
+		test_interaction_point.y >= min_y and test_interaction_point.y <= max_y
+	)
+		
+		if is_pointing_at_chest:
+			player_facing_chest = true
+		
+		#var alignment_score: float = player_facing.dot(direction_to_chest)
+		#
+		#if alignment_score > 0.5:
+			##print("Player is facing the chest. Opening lockbox!")
+			#player_facing_chest = true
+			#open_chest()
+		#else:
+			#print("Interaction Blocked: Player must turn around to face the chest.")
 
 func _on_interaction_zone_body_exited(body: Node2D) -> void:
 	if body is CharacterBody2D and body.name == "Player":
 		player_in_range = false
+		player_facing_chest = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

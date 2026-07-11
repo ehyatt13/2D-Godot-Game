@@ -53,6 +53,7 @@ position = Vector2(-88, -120)
 position = Vector2(64, -32)
 item_id = "heart_upgrade"
 item_quantity = 2
+chest_size = 1
 
 [node name="Chest2" parent="Interactables" parent_id_path=PackedInt32Array(1975639655) index="1" unique_id=1310473946 instance=ExtResource("3_6w7gs")]
 position = Vector2(96, -32)
@@ -89,7 +90,3 @@ position = Vector2(24, -56)
 
 [node name="BreakableBush3" parent="Interactables" parent_id_path=PackedInt32Array(1975639655) index="9" unique_id=1172516469 instance=ExtResource("10_eo2a4")]
 position = Vector2(64, -56)
-
-[node name="CanvasModulate" parent="." index="6" unique_id=936057778]
-color = Color(0.08, 0.08, 0.12, 1)
-lighting_preset = 1

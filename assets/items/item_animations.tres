@@ -1,0 +1,30 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bj8d18o3b0n41"]
+
+[ext_resource type="Texture2D" uid="uid://k1q6s7o3gcwl" path="res://assets/sprites/player_torch.png" id="1_stbn0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_esdll"]
+atlas = ExtResource("1_stbn0")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5lwd"]
+atlas = ExtResource("1_stbn0")
+region = Rect2(16, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_esdll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5lwd")
+}],
+"loop": 1,
+"name": &"torch_flicker",
+"speed": 8.0
+}]

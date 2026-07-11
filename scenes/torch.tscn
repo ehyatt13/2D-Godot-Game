@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dq5scqnc74m2l" path="res://assets/sprites/torch.png" id="1_my26j"]
 [ext_resource type="Script" uid="uid://cmujceens1isp" path="res://scenes/torch.gd" id="1_o2tjn"]
 [ext_resource type="PackedScene" uid="uid://c3vsltcvkxse2" path="res://scenes/flickering_light.tscn" id="2_o2tjn"]
+[ext_resource type="Texture2D" uid="uid://wv74pvjk5scu" path="res://assets/lighting/light_gradient.png" id="4_r3k50"]
 
 [sub_resource type="Animation" id="Animation_my26j"]
 length = 0.001
@@ -69,6 +70,8 @@ hframes = 2
 vframes = 2
 
 [node name="FlickeringLight" parent="." unique_id=1533560009 instance=ExtResource("2_o2tjn")]
+texture = ExtResource("4_r3k50")
+texture_scale = 2.5
 base_energy = 0.75
 flicker_intensity = 0.3
 base_scale = 0.5
