@@ -1,6 +1,8 @@
 @tool
 extends StaticBody2D
 
+signal chest_opened
+
 enum ChestSize {
 	NORMAL,
 	BIG
@@ -8,7 +10,7 @@ enum ChestSize {
 
 @export_group("Chest Contents")
 ## Id of the item within the chest corresponding with the ItemDatabase
-@export var item_id: String = "golden_key"
+@export var item_id: String = "gold_coin"
 ## Quantity of the item
 @export var item_quantity: int = 1
 
@@ -164,6 +166,7 @@ func open_chest() -> void:
 	
 	_spawn_loot_popup_visuals()
 	_deliver_loot()
+	chest_opened.emit()
 
 func _spawn_loot_popup_visuals() -> void:
 	var floating_container: Node2D = Node2D.new()

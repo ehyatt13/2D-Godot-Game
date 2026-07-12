@@ -11,4 +11,5 @@ func _on_interaction_zone_body_entered(body: Node2D) -> void:
 		is_pressed = true
 		sprite.frame = 9
 		print("You pressed the switch.")
-		emit_signal("activated")
+		#emit_signal("activated")
+		activated.emit()
