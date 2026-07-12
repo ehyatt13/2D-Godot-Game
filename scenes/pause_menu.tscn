@@ -86,7 +86,25 @@ stretch_mode = 5
 layout_mode = 2
 text = "0"
 
+[node name="EquipmentLabel" type="Label" parent="MenuFrame/VBoxContainer" unique_id=1802844718]
+layout_mode = 2
+text = "EQUIPMENT
+"
+
 [node name="WeaponGrid" type="GridContainer" parent="MenuFrame/VBoxContainer" unique_id=1212251345]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 4
+
+[node name="KeyItemsLabel" type="Label" parent="MenuFrame/VBoxContainer" unique_id=1304256902]
+layout_mode = 2
+text = "KEY ITEMS
+"
+
+[node name="KeyItemGrid" type="GridContainer" parent="MenuFrame/VBoxContainer" unique_id=392797957]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8

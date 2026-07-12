@@ -104,11 +104,23 @@ static func get_item_data(id: String) -> Dictionary:
 		return ITEMS[id]
 	return {}
 
+const BUSH_PARTICLES_SCENE: PackedScene = preload("res://scenes/bush_particles.tscn")
 
 func spawn_loot_drop(table_id: String, world_coordinates: Vector2) -> void:
 	if not LOOT_TABLES.has(table_id):
 		print("Error: Requested loot table '", table_id, "' does not exist in the database.")
 		return
+	
+	if table_id == "breakable_bush":
+		var leaves = BUSH_PARTICLES_SCENE.instantiate()
+		var game_manager = get_tree().root.get_node_or_null("Game")
+		if game_manager:
+			var active_map = game_manager.get_node_or_null("World").get_child(0)
+			var target_folder = active_map.get_node_or_null("Interactables") if active_map else null
+			
+			if target_folder:
+				leaves.global_position = world_coordinates
+				target_folder.add_child(leaves)
 	
 	var chosen_table: Array = LOOT_TABLES[table_id]
 	var random_roll: float = randf()

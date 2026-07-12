@@ -5,6 +5,7 @@ extends Control
 @onready var coin_label: Label = $MenuFrame/VBoxContainer/StatsHBox/CoinContainer/CoinLabel
 @onready var bomb_label: Label = $MenuFrame/VBoxContainer/StatsHBox/BombContainer/BombLabel
 @onready var weapon_grid: GridContainer = $MenuFrame/VBoxContainer/WeaponGrid
+@onready var key_item_grid: GridContainer = $MenuFrame/VBoxContainer/KeyItemGrid
 
 var last_focused_index: int = 0
 
@@ -28,8 +29,6 @@ func toggle_pause() -> void:
 		_refresh_menu_display()
 
 func _refresh_menu_display() -> void:
-	#coin_label.text = "Gold Coins: " + str(GlobalPlayerData.gold_coins)
-	#bomb_label.text = "Bombs: " + str(GlobalPlayerData.bombs)
 	coin_label.text = str(GlobalPlayerData.gold_coins)
 	bomb_label.text = str(GlobalPlayerData.bombs)
 	
@@ -38,6 +37,10 @@ func _refresh_menu_display() -> void:
 	
 	for child in weapon_grid.get_children():
 		weapon_grid.remove_child(child)
+		child.queue_free()
+	
+	for child in key_item_grid.get_children():
+		key_item_grid.remove_child(child)
 		child.queue_free()
 	
 	var first_button: TextureButton = null
@@ -119,9 +122,79 @@ func _refresh_menu_display() -> void:
 		if first_button == null:
 			first_button = item_slot
 		
-		for button in weapon_grid.get_children():
-			if button is TextureButton:
-				button.focus_neighbor_bottom = button.get_path()
+	var key_item_registry: Dictionary = {
+		"magic_torch": "has_torch",
+		# "power_glove": "has_power_glove" <-- You can easily append future relics here!
+	}
+	
+	for item_id in key_item_registry.keys():
+		var associated_flag: String = key_item_registry[item_id]
+		if GlobalPlayerData.flags.get(associated_flag, false):
+			var item_info: Dictionary = ItemDatabase.get_item_data(item_id)
+			if item_info.is_empty(): continue
+			
+			var cell_frame: Control = Control.new()
+			cell_frame.custom_minimum_size = Vector2(64, 64)
+			cell_frame.focus_mode = Control.FOCUS_NONE
+			cell_frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			
+			var anim_name: String = item_info.get("animation_name", "")
+			var shared_frames = load("res://assets/items/item_animations.tres")
+			
+			if anim_name != "" and shared_frames:
+				var menu_anim_sprite: AnimatedSprite2D = AnimatedSprite2D.new()
+				menu_anim_sprite.sprite_frames = shared_frames
+				
+				#menu_anim_sprite.position = Vector2(16, 16)
+				
+				#var scale_factor: float = item_info.get("visual_scale", 1.0)
+				#menu_anim_sprite.scale = Vector2(scale_factor, scale_factor)
+				
+				var menu_scale_multiplier: float = 3.0
+				menu_anim_sprite.scale = Vector2(menu_scale_multiplier, menu_scale_multiplier)
+				
+				menu_anim_sprite.position = Vector2(32, 32)
+				
+				cell_frame.add_child(menu_anim_sprite)
+				menu_anim_sprite.play(anim_name)
+			
+			else:
+				var static_img: TextureRect = TextureRect.new()
+			
+				var atlas_key: String = item_info["atlas"]
+				var atlas_config: Dictionary = ItemDatabase.ATLAS_SHEETS[atlas_key]
+				var master_texture: Texture2D = load(atlas_config["path"])
+				
+				var cell_width: float = master_texture.get_width() / float(atlas_config["hframes"])
+				var cell_height: float = master_texture.get_height() / float(atlas_config["vframes"])
+				
+				var frame: int = item_info["frame"]
+				var column: int = frame % atlas_config["hframes"]
+				var row: int = frame / atlas_config["hframes"]
+				var slice_region: Rect2 = Rect2(column * cell_width, row * cell_height, cell_width, cell_height)
+				
+				var item_icon: AtlasTexture = AtlasTexture.new()
+				item_icon.atlas = master_texture
+				item_icon.region = slice_region
+				
+				#var key_slot: TextureRect = TextureRect.new()
+				static_img.texture = item_icon
+				static_img.custom_minimum_size = Vector2(32, 32)
+				static_img.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+				
+				var scale_factor: float = item_info.get("visual_scale", 1.0)
+				static_img.scale = Vector2(scale_factor, scale_factor)
+				
+				#static_img.focus_mode = Control.FOCUS_NONE
+				#static_img.mouse_filter = Control.MOUSE_FILTER_IGNORE
+				
+				cell_frame.add_child(static_img)
+			
+			key_item_grid.add_child(cell_frame)
+	
+	for button in weapon_grid.get_children():
+		if button is TextureButton:
+			button.focus_neighbor_bottom = button.get_path()
 	
 	if weapon_grid.get_child_count() > 0:
 		var target_index: int = clamp(last_focused_index, 0, weapon_grid.get_child_count() - 1)

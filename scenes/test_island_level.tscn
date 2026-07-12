@@ -11,6 +11,7 @@
 [ext_resource type="Shader" uid="uid://bqq0jfedishh1" path="res://scenes/test_island_level.gdshader" id="7_w8l34"]
 [ext_resource type="PackedScene" uid="uid://bjqna6o8x1ssf" path="res://scenes/breakable_rock.tscn" id="9_xjp0m"]
 [ext_resource type="PackedScene" uid="uid://cgc2lb20c5aij" path="res://scenes/breakable_bush.tscn" id="10_eo2a4"]
+[ext_resource type="PackedScene" uid="uid://cnj6dgqwlpnqj" path="res://scenes/door_transition.tscn" id="12_0anr6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5p5iq"]
 shader = ExtResource("7_w8l34")
@@ -95,3 +96,6 @@ position = Vector2(24, -56)
 
 [node name="BreakableBush3" parent="Interactables" parent_id_path=PackedInt32Array(1975639655) index="9" unique_id=1172516469 instance=ExtResource("10_eo2a4")]
 position = Vector2(64, -56)
+
+[node name="DoorTransition" parent="Interactables" parent_id_path=PackedInt32Array(1975639655) index="10" unique_id=1891565103 instance=ExtResource("12_0anr6")]
+position = Vector2(144, -56)

@@ -33,6 +33,10 @@ window/stretch/scale_mode="integer"
 window/snap/snap_2d_vertices_to_pixel=false
 window/snap/snap_2d_transforms_to_pixel=false
 
+[global_group]
+
+TransitionEngine=""
+
 [input]
 
 ui_left={

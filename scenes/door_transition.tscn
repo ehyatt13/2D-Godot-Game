@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cnj6dgqwlpnqj"]
+
+[ext_resource type="Script" uid="uid://81gr1mokr40k" path="res://scenes/door_transition.gd" id="1_q08rg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sj5e7"]
+size = Vector2(16, 4)
+
+[node name="DoorTransition" type="Area2D" unique_id=1891565103]
+collision_layer = 0
+script = ExtResource("1_q08rg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=586893896]
+shape = SubResource("RectangleShape2D_sj5e7")
