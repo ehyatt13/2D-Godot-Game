@@ -5,6 +5,7 @@ extends CharacterBody2D
 
 @onready var sprite: Sprite2D = $"Sprite2D"
 @onready var detection_zone: Area2D = $"DetectionRange"
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var health: int = max_health
 var player_target: CharacterBody2D = null
@@ -16,6 +17,9 @@ func _ready() -> void:
 	health = max_health
 	detection_zone.body_entered.connect(_on_player_detected)
 	detection_zone.body_exited.connect(_on_player_lost)
+	
+	if animation_player.has_animation("idle_bounce"):
+		animation_player.play("idle_bounce")
 
 
 func _physics_process(delta: float) -> void:
@@ -26,6 +30,8 @@ func _physics_process(delta: float) -> void:
 		
 		if knockback_velocity.length() < 10.0:
 			is_stunned = false
+			if animation_player.has_animation("chase_bounce"):
+				animation_player.play("chase_bounce")
 	
 	elif player_target:
 		var chase_direction: Vector2 = (player_target.global_position - global_position).normalized()
@@ -52,6 +58,9 @@ func take_damage(amount: int) -> void:
 	sprite.modulate = Color.RED
 	var tween = create_tween()
 	tween.tween_property(sprite, "modulate", Color.WHITE, 0.2)
+	
+	if animation_player.is_playing():
+		animation_player.stop()
 	
 	var root_node = get_tree().root
 	var game_manager = root_node.get_node_or_null("Game")
@@ -95,8 +104,14 @@ func _on_player_detected(body: Node2D) -> void:
 	if body is CharacterBody2D and body.name == "Player":
 		player_target = body
 		print("Slime targeted the player!")
+		
+		if animation_player.has_animation("chase_bounce"):
+			animation_player.play("chase_bounce")
 
 func _on_player_lost(body: Node2D) -> void:
 	if body == player_target:
 		player_target = null
 		print("Player escaped slime sight lines.")
+		
+		if animation_player.has_animation("idle_bounce"):
+			animation_player.play("idle_bounce")
