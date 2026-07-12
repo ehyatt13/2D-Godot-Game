@@ -11,6 +11,9 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_56nkt"]
 shader = ExtResource("2_20eqo")
+shader_parameter/fog_color = Color(0.8, 0.8, 0.85, 0.3)
+shader_parameter/speed = 10.0
+shader_parameter/fog_density = 0.02
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_welxc"]
 texture = ExtResource("4_6q4is")
@@ -706,8 +709,27 @@ tile_set = SubResource("TileSet_3kk4n")
 [node name="Entities" type="Node2D" parent="." unique_id=225215360]
 y_sort_enabled = true
 
+[node name="Enemies" type="Node2D" parent="Entities" unique_id=1833888600]
+y_sort_enabled = true
+
+[node name="ItemPickups" type="Node2D" parent="Entities" unique_id=487207791]
+
+[node name="Torches" type="Node2D" parent="Entities" unique_id=1186479578]
+y_sort_enabled = true
+
 [node name="Interactables" type="Node2D" parent="." unique_id=681838472]
 y_sort_enabled = true
+
+[node name="Chests" type="Node2D" parent="Interactables" unique_id=635561518]
+y_sort_enabled = true
+
+[node name="DoorTransitions" type="Node2D" parent="Interactables" unique_id=967577544]
+
+[node name="LevelExits" type="Node2D" parent="Interactables" unique_id=1726268306]
+
+[node name="RoomBounds" type="Node2D" parent="Interactables" unique_id=1493997156]
+
+[node name="Switches" type="Node2D" parent="Interactables" unique_id=72844782]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=822277979]
 script = ExtResource("8_blo3p")

@@ -37,26 +37,41 @@ tile_map_data = PackedByteArray("AAD1//T/AAADAAMAAAD1//X/AAABAAIAAAD2//X/AAABAAE
 [node name="ObjectLayer" parent="." index="3" unique_id=1917500959]
 tile_map_data = PackedByteArray("AAAKAP3/AAABAAMAAAAMAP3/AAABAAMAAAALAP3/AAAAAAMAAAACAP//AAAAAAUAAAA=")
 
-[node name="Torch" parent="Entities" parent_id_path=PackedInt32Array(1075964594) index="0" unique_id=132525163 instance=ExtResource("4_w8l34")]
-position = Vector2(8, -48)
+[node name="Enemies" parent="Entities" parent_id_path=PackedInt32Array(1075964594) index="0" unique_id=1076410481]
+y_sort_enabled = true
 
-[node name="Torch2" parent="Entities" parent_id_path=PackedInt32Array(1075964594) index="1" unique_id=452257070 instance=ExtResource("4_w8l34")]
-position = Vector2(136, -24)
+[node name="EnemySlime" parent="Entities/Enemies" index="0" unique_id=1678480407 instance=ExtResource("6_77bd2")]
+position = Vector2(-88, -120)
 
-[node name="ItemPickup" parent="Entities" parent_id_path=PackedInt32Array(1075964594) index="2" unique_id=1078076270 instance=ExtResource("5_2lupc")]
+[node name="ItemPickup" parent="Entities/ItemPickups" parent_id_path=PackedInt32Array(179689881) index="0" unique_id=1078076270 instance=ExtResource("5_2lupc")]
 position = Vector2(-24, -88)
 item_id = "bomb"
 
-[node name="EnemySlime" parent="Entities" parent_id_path=PackedInt32Array(1075964594) index="3" unique_id=1678480407 instance=ExtResource("6_77bd2")]
-position = Vector2(-88, -120)
+[node name="Torch" parent="Entities/Torches" parent_id_path=PackedInt32Array(1928232028) index="0" unique_id=132525163 instance=ExtResource("4_w8l34")]
+position = Vector2(8, -48)
 
-[node name="Chest" parent="Interactables" parent_id_path=PackedInt32Array(1975639655) index="0" unique_id=1107813732 instance=ExtResource("3_6w7gs")]
+[node name="Torch2" parent="Entities/Torches" parent_id_path=PackedInt32Array(1928232028) index="1" unique_id=452257070 instance=ExtResource("4_w8l34")]
+position = Vector2(136, -24)
+
+[node name="DoorTransition" parent="Interactables" parent_id_path=PackedInt32Array(1975639655) index="0" unique_id=1891565103 instance=ExtResource("12_0anr6")]
+position = Vector2(144, -56)
+
+[node name="BreakableBush" parent="Interactables/Bushes" parent_id_path=PackedInt32Array(2074126810) index="0" unique_id=1748466605 instance=ExtResource("10_eo2a4")]
+position = Vector2(16, -16)
+
+[node name="BreakableBush2" parent="Interactables/Bushes" parent_id_path=PackedInt32Array(2074126810) index="1" unique_id=202933341 instance=ExtResource("10_eo2a4")]
+position = Vector2(24, -56)
+
+[node name="BreakableBush3" parent="Interactables/Bushes" parent_id_path=PackedInt32Array(2074126810) index="2" unique_id=1172516469 instance=ExtResource("10_eo2a4")]
+position = Vector2(64, -56)
+
+[node name="Chest" parent="Interactables/Chests" parent_id_path=PackedInt32Array(1367088013) index="0" unique_id=1107813732 instance=ExtResource("3_6w7gs")]
 position = Vector2(64, -32)
 item_id = "heart_upgrade"
 item_quantity = 2
 chest_size = 1
 
-[node name="Chest2" parent="Interactables" parent_id_path=PackedInt32Array(1975639655) index="1" unique_id=1310473946 instance=ExtResource("3_6w7gs")]
+[node name="Chest2" parent="Interactables/Chests" parent_id_path=PackedInt32Array(1367088013) index="1" unique_id=1310473946 instance=ExtResource("3_6w7gs")]
 visible = false
 position = Vector2(96, -32)
 collision_layer = 0
@@ -67,35 +82,23 @@ collision_toggle = false
 frame_closed = 6
 frame_open = 7
 
-[node name="Chest3" parent="Interactables" parent_id_path=PackedInt32Array(1975639655) index="2" unique_id=394765704 instance=ExtResource("3_6w7gs")]
+[node name="Chest3" parent="Interactables/Chests" parent_id_path=PackedInt32Array(1367088013) index="2" unique_id=394765704 instance=ExtResource("3_6w7gs")]
 position = Vector2(96, -56)
 item_id = "crystal"
 frame_closed = 5
 
-[node name="Switch" parent="Interactables" parent_id_path=PackedInt32Array(1975639655) index="3" unique_id=2028142053 instance=ExtResource("4_5p5iq")]
-position = Vector2(32, -32)
-
-[node name="LevelExit" parent="Interactables" parent_id_path=PackedInt32Array(1975639655) index="4" unique_id=1439442201 instance=ExtResource("6_5p5iq")]
-position = Vector2(184, -40)
-target_level_path = "uid://xu1n23okxv7k"
-spawn_coordinates = Vector2(-8, 24)
-
-[node name="Chest4" parent="Interactables" parent_id_path=PackedInt32Array(1975639655) index="5" unique_id=112478252 instance=ExtResource("3_6w7gs")]
+[node name="Chest4" parent="Interactables/Chests" parent_id_path=PackedInt32Array(1367088013) index="3" unique_id=112478252 instance=ExtResource("3_6w7gs")]
 position = Vector2(-24, -8)
 item_id = "bomb"
 item_quantity = 5
 
-[node name="BreakableRock" parent="Interactables" parent_id_path=PackedInt32Array(1975639655) index="6" unique_id=1226098217 instance=ExtResource("9_xjp0m")]
+[node name="LevelExit" parent="Interactables/LevelExits" parent_id_path=PackedInt32Array(955366397) index="0" unique_id=1439442201 instance=ExtResource("6_5p5iq")]
+position = Vector2(184, -40)
+target_level_path = "uid://xu1n23okxv7k"
+spawn_coordinates = Vector2(-8, 24)
+
+[node name="BreakableRock" parent="Interactables/Rocks" parent_id_path=PackedInt32Array(1764905108) index="0" unique_id=1226098217 instance=ExtResource("9_xjp0m")]
 position = Vector2(80, 0)
 
-[node name="BreakableBush" parent="Interactables" parent_id_path=PackedInt32Array(1975639655) index="7" unique_id=1748466605 instance=ExtResource("10_eo2a4")]
-position = Vector2(16, -16)
-
-[node name="BreakableBush2" parent="Interactables" parent_id_path=PackedInt32Array(1975639655) index="8" unique_id=202933341 instance=ExtResource("10_eo2a4")]
-position = Vector2(24, -56)
-
-[node name="BreakableBush3" parent="Interactables" parent_id_path=PackedInt32Array(1975639655) index="9" unique_id=1172516469 instance=ExtResource("10_eo2a4")]
-position = Vector2(64, -56)
-
-[node name="DoorTransition" parent="Interactables" parent_id_path=PackedInt32Array(1975639655) index="10" unique_id=1891565103 instance=ExtResource("12_0anr6")]
-position = Vector2(144, -56)
+[node name="Switch" parent="Interactables/Switches" parent_id_path=PackedInt32Array(1734416711) index="0" unique_id=2028142053 instance=ExtResource("4_5p5iq")]
+position = Vector2(32, -32)

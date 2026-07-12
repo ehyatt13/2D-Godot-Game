@@ -7,7 +7,7 @@ func _ready() -> void:
 	rect.material.set_shader_parameter("progress", 0.0)
 
 
-func play_diamond_cut_transition(player_node: CharacterBody2D, camera_node: Camera2D, teleport_offset: Vector2) -> void:
+func play_diamond_cut_transition(player_node: CharacterBody2D, camera_node: Camera2D, teleport_offset: Vector2, next_room: ReferenceRect) -> void:
 	player_node.set_physics_process(false)
 	if "is_attacking" in player_node: player_node.is_attacking = true
 	
@@ -17,6 +17,15 @@ func play_diamond_cut_transition(player_node: CharacterBody2D, camera_node: Came
 	await tween.finished
 	
 	player_node.global_position += teleport_offset
+	
+	if next_room and camera_node:
+		var room_origin: Vector2 = next_room.global_position
+		var room_size: Vector2 = next_room.size
+		
+		camera_node.limit_left = int(room_origin.x)
+		camera_node.limit_top = int(room_origin.y)
+		camera_node.limit_right = int(room_origin.x + room_size.x)
+		camera_node.limit_bottom = int(room_origin.y + room_size.y)
 	
 	camera_node.global_position = player_node.global_position
 	camera_node.reset_smoothing()

@@ -19,6 +19,10 @@ const PRESET_COORDS: Dictionary = {
 
 @export var direction: TRANSITION_DIRECTION = TRANSITION_DIRECTION.NORTH
 
+@export_group("Camera Bounding Layouts")
+## Drag and drop the ReferenceRect node representing the chamber you are ENTERING
+@export var target_room_bounds: ReferenceRect
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	body_entered.connect(_on_player_entered_doorway)
@@ -38,7 +42,7 @@ func _on_player_entered_doorway(body: Node2D) -> void:
 		if overlay and camera:
 			if PRESET_COORDS.has(direction):
 				var player_teleport_push = PRESET_COORDS[direction]
-				overlay.play_diamond_cut_transition(body, camera, player_teleport_push)
+				overlay.play_diamond_cut_transition(body, camera, player_teleport_push, target_room_bounds)
 		#else:
 			## Highly targeted debugging tracking prints: Tells you exactly which node failed to compile
 			#if not overlay:

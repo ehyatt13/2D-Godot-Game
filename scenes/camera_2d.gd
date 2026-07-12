@@ -14,6 +14,7 @@ extends Camera2D
 @export_group("Dynamic Detection")
 ## TileLayer to be the bound for the camera
 @export var target_map: TileMapLayer
+@export var target_room: ReferenceRect
 
 var shake_intensity: float = 0.0
 var shake_decay: float = 5.0
@@ -21,8 +22,10 @@ var max_shake_offset: float = 15.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if target_map:
-		_calculate_dynamic_bounds()
+	if target_room:
+		_calculate_dynamic_room_bounds()
+	elif target_map:
+		_calculate_dynamic_layer_bounds()
 	else:
 		_apply_manual_bounds()
 	
@@ -36,7 +39,7 @@ func _apply_manual_bounds() -> void:
 	limit_top = manual_top
 	limit_bottom = manual_bottom
 
-func _calculate_dynamic_bounds() -> void:
+func _calculate_dynamic_layer_bounds() -> void:
 	var map_rect: Rect2i = target_map.get_used_rect()
 	var cell_size: Vector2i = target_map.tile_set.tile_size
 	
@@ -44,7 +47,15 @@ func _calculate_dynamic_bounds() -> void:
 	limit_right = map_rect.end.x * cell_size.x
 	limit_top = map_rect.position.y * cell_size.y
 	limit_bottom = map_rect.end.y * cell_size.y
+
+func _calculate_dynamic_room_bounds() -> void:
+	var room_origin: Vector2 = target_room.global_position
+	var room_size: Vector2 = target_room.size
 	
+	limit_left = int(room_origin.x)
+	limit_top = int(room_origin.y)
+	limit_right = int(room_origin.x + room_size.x)
+	limit_bottom = int(room_origin.y + room_size.y)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:

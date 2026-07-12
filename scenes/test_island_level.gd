@@ -1,10 +1,10 @@
 extends Node2D
 
-@onready var floor_switch: Node2D = $"Interactables/Switch"
+@onready var floor_switch: Node2D = $"Interactables/Switches/Switch"
 
-@onready var locked_chest: Node2D = $"Interactables/Chest2"
+@onready var locked_chest: Node2D = $"Interactables/Chests/Chest2"
 
-@onready var test_torch_light: Node2D = $"Entities/Torch2/FlickeringLight"
+@onready var test_torch_light: Node2D = $"Entities/Torches/Torch2/FlickeringLight"
 
 @onready var canvas_modulate: CanvasModulate = $CanvasModulate
 
