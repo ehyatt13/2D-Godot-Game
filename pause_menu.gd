@@ -6,6 +6,7 @@ extends Control
 @onready var bomb_label: Label = $MenuFrame/VBoxContainer/StatsHBox/BombContainer/BombLabel
 @onready var weapon_grid: GridContainer = $MenuFrame/VBoxContainer/WeaponGrid
 @onready var key_item_grid: GridContainer = $MenuFrame/VBoxContainer/KeyItemGrid
+@onready var description_label: Label = $MenuFrame/VBoxContainer/DescriptionMargin/DescriptionPanel/MarginContainer/DescriptionLabel
 
 var last_focused_index: int = 0
 
@@ -80,10 +81,13 @@ func _refresh_menu_display() -> void:
 		item_slot.process_mode = Node.PROCESS_MODE_INHERIT
 		item_slot.focus_mode = Control.FOCUS_ALL
 		
+		var item_description: String = item_info.get("description", "A mysterious treasure item.")
+		var item_title_name: String = item_info.get("name", "Item")
+		
 		var capture_index: int = i
 		item_slot.focus_entered.connect(func(): 
 			last_focused_index = capture_index
-			_on_slot_focused(item_slot))
+			_on_slot_focused(item_slot, item_title_name, item_description))
 		item_slot.focus_exited.connect(func(): _on_slot_focus_lost(item_slot, capture_index))
 		
 		item_slot.gui_input.connect(func(event: InputEvent):
@@ -211,8 +215,28 @@ func _on_item_slot_selected(index: int) -> void:
 	
 	_refresh_menu_display()
 
-func _on_slot_focused(slot_node: TextureButton) -> void:
+func _on_slot_focused(slot_node: TextureButton, title: String, description: String) -> void:
 	slot_node.self_modulate = Color(1.5, 1.5, 1.5, 1.0)
+	description_label.text = "[" + title + "] - " + description
+	
+	var selection_border: ReferenceRect = ReferenceRect.new()
+	selection_border.name = "ActiveSelectionBorder"
+	selection_border.border_color = Color(0.1, 0.6, 1.0, 1.0) 
+	selection_border.border_width = 2.0
+	selection_border.editor_only = false 
+	selection_border.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	selection_border.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	slot_node.add_child(selection_border)
+	
+	selection_border.offset_left = 2
+	selection_border.offset_top = 2
+	selection_border.offset_right = -2
+	selection_border.offset_bottom = -2
 
 func _on_slot_focus_lost(slot_node: TextureButton, index: int) -> void:
 	slot_node.self_modulate = Color(1.0, 1.0, 1.0, 1.0)
+	description_label.text = ""
+	
+	var old_border = slot_node.get_node_or_null("ActiveSelectionBorder")
+	if old_border:
+		old_border.queue_free()

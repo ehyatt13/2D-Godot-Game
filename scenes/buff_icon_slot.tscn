@@ -28,7 +28,7 @@ grow_vertical = 2
 stretch_mode = 5
 
 [node name="RadialClock" type="TextureProgressBar" parent="." unique_id=845149187]
-modulate = Color(0.44313726, 1, 0.29803923, 0.50980395)
+modulate = Color(0.44313726, 1, 0.29803923, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 1
 anchors_preset = 15

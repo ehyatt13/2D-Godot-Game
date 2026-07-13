@@ -137,10 +137,7 @@ func _use_equipped_item() -> void:
 		
 		"regen_potion":
 			active_item.id = "empty_bottle"
-			#for i in 6:
-				#await get_tree().create_timer(2.0, false).timeout
-				#GlobalPlayerData.health += 1
-			GlobalPlayerData.apply_status_buff("regeneration", 12.0)
+			GlobalPlayerData.apply_status_buff("regeneration", 24.0)
 
 func _spawn_bomb_in_world() -> void:
 	var new_bomb = bomb_scene.instantiate()

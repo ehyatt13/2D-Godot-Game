@@ -49,7 +49,8 @@ const ITEMS: Dictionary = {
 		"name": "Crystal",
 		"frame": 1,
 		"atlas": "objects",
-		"behavior": "selectable"
+		"behavior": "selectable",
+		"description": "A crystal of unknown power."
 	},
 	"gold_coin": {
 		"name": "Gold Coin",
@@ -77,7 +78,8 @@ const ITEMS: Dictionary = {
 		"frame": 0,
 		"atlas": "bomb",
 		"behavior": "selectable",
-		"target_stat": "bombs"
+		"target_stat": "bombs",
+		"description": "A dangerous item that will explode after a few seconds."
 	},
 	"magic_torch": {
 		"name": "Magic Torch",
@@ -97,19 +99,22 @@ const ITEMS: Dictionary = {
 		"name": "Health Potion",
 		"frame": 1,
 		"atlas": "potions",
-		"behavior": "selectable"
+		"behavior": "selectable",
+		"description": "A potion that instantly restores 3 full hearts."
 	},
 	"speed_potion": {
 		"name": "Swiftness Potion",
 		"frame": 4,
 		"atlas": "potions",
-		"behavior": "selectable"
+		"behavior": "selectable",
+		"description": "A potion that increases movement speed for a brief period."
 	},
 	"regen_potion": {
 		"name": "Regeneration Potion",
 		"frame": 5,
 		"atlas": "potions",
-		"behavior": "selectable"
+		"behavior": "selectable",
+		"description": "A potion that restores 6 full hearts over a period of time."
 	}
 }
 

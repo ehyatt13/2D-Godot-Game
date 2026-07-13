@@ -12,7 +12,7 @@ var is_cut: bool = false
 func _ready() -> void:
 	sprite.frame = frame_healthy
 
-func take_damage(amount: int) -> void:
+func take_damage(_amount: int) -> void:
 	if is_cut: return
 	is_cut = true
 	print("The bush was destroyed!")

@@ -12,6 +12,18 @@ region = Rect2(32, 0, 16, 16)
 atlas = ExtResource("3_5d2l8")
 region = Rect2(0, 0, 16, 16)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kukqi"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.2784314, 0.2784314, 0.2784314, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 12
+
 [node name="PauseMenu" type="Control" unique_id=1886712646]
 process_mode = 3
 layout_mode = 3
@@ -34,7 +46,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0.39215687)
 
 [node name="MenuFrame" type="PanelContainer" parent="." unique_id=1238533300]
-custom_minimum_size = Vector2(1000, 600)
+custom_minimum_size = Vector2(1000, 400)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -56,6 +68,7 @@ layout_mode = 2
 text = "INVENTORY"
 
 [node name="StatsHBox" type="HBoxContainer" parent="MenuFrame/VBoxContainer" unique_id=1030304703]
+custom_minimum_size = Vector2(0, 23)
 layout_mode = 2
 
 [node name="CoinContainer" type="HBoxContainer" parent="MenuFrame/VBoxContainer/StatsHBox" unique_id=1364913659]
@@ -86,26 +99,58 @@ stretch_mode = 5
 layout_mode = 2
 text = "0"
 
+[node name="EquipmentSpacer" type="Control" parent="MenuFrame/VBoxContainer" unique_id=1099839852]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
 [node name="EquipmentLabel" type="Label" parent="MenuFrame/VBoxContainer" unique_id=1802844718]
 layout_mode = 2
-text = "EQUIPMENT
-"
+text = "EQUIPMENT"
 
 [node name="WeaponGrid" type="GridContainer" parent="MenuFrame/VBoxContainer" unique_id=1212251345]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 theme_override_constants/h_separation = 8
-theme_override_constants/v_separation = 8
+theme_override_constants/v_separation = 2
 columns = 4
+
+[node name="KeyItemSpacer" type="Control" parent="MenuFrame/VBoxContainer" unique_id=169000046]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
 
 [node name="KeyItemsLabel" type="Label" parent="MenuFrame/VBoxContainer" unique_id=1304256902]
 layout_mode = 2
-text = "KEY ITEMS
-"
+text = "KEY ITEMS"
 
 [node name="KeyItemGrid" type="GridContainer" parent="MenuFrame/VBoxContainer" unique_id=392797957]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 theme_override_constants/h_separation = 8
-theme_override_constants/v_separation = 8
+theme_override_constants/v_separation = 2
 columns = 4
+
+[node name="DescriptionSpacer" type="Control" parent="MenuFrame/VBoxContainer" unique_id=1328059365]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+
+[node name="DescriptionMargin" type="MarginContainer" parent="MenuFrame/VBoxContainer" unique_id=1413170508]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+
+[node name="DescriptionPanel" type="PanelContainer" parent="MenuFrame/VBoxContainer/DescriptionMargin" unique_id=301478742]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kukqi")
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuFrame/VBoxContainer/DescriptionMargin/DescriptionPanel" unique_id=461084952]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="DescriptionLabel" type="Label" parent="MenuFrame/VBoxContainer/DescriptionMargin/DescriptionPanel/MarginContainer" unique_id=1568568696]
+custom_minimum_size = Vector2(120, 100)
+layout_mode = 2
+autowrap_mode = 2
