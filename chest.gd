@@ -54,6 +54,10 @@ enum ChestSize {
 		frame_open = value
 		_update_chest_state()
 
+@export_group("Persistence Identifier")
+@export var chest_unique_id: String = ""
+@export var revealed_by_puzzle_id: String = ""
+
 @onready var sprite: Sprite2D = $"Sprite2D"
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
@@ -61,7 +65,32 @@ enum ChestSize {
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	_check_persistence_records()
 	_update_chest_state()
+
+func _check_persistence_records() -> void:
+	if Engine.is_editor_hint(): return
+	if chest_unique_id == "": return
+	
+	var level_name: String = GlobalPlayerData.get_active_level_name()
+	
+	if GlobalPlayerData.has_been_triggered(level_name, chest_unique_id):
+		is_open = true
+		is_hidden = false
+		collision_toggle = true
+		return
+	
+	if revealed_by_puzzle_id != "":
+		if GlobalPlayerData.has_been_triggered(level_name, revealed_by_puzzle_id):
+			is_hidden = false
+			collision_toggle = true
+
+func reveal_chest_by_gameplay() -> void:
+	is_hidden = false
+	collision_toggle = true
+	modulate.a = 0.0
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 1.0, 0.5)
 
 func _update_chest_state() -> void:
 	_update_chest_sprite_visuals()
@@ -167,6 +196,9 @@ func open_chest() -> void:
 	_spawn_loot_popup_visuals()
 	_deliver_loot()
 	chest_opened.emit()
+	if chest_unique_id != "":
+		var level_name: String = GlobalPlayerData.get_active_level_name()
+		GlobalPlayerData.register_world_trigger(level_name, chest_unique_id)
 
 func _spawn_loot_popup_visuals() -> void:
 	var floating_container: Node2D = Node2D.new()

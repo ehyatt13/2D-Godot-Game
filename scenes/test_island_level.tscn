@@ -49,6 +49,7 @@ y_sort_enabled = true
 [node name="ItemPickup" parent="Entities/ItemPickups" index="0" unique_id=1078076270 instance=ExtResource("5_2lupc")]
 position = Vector2(112, -48)
 item_id = "speed_potion"
+pickup_unique_id = "free_potion"
 
 [node name="Torch" parent="Entities/Torches" parent_id_path=PackedInt32Array(1928232028) index="0" unique_id=132525163 instance=ExtResource("4_w8l34")]
 position = Vector2(8, -48)
@@ -73,26 +74,33 @@ position = Vector2(64, -32)
 item_id = "heart_upgrade"
 item_quantity = 2
 chest_size = 1
+chest_unique_id = null
+revealed_by_puzzle_id = null
 
 [node name="Chest2" parent="Interactables/Chests" parent_id_path=PackedInt32Array(1367088013) index="1" unique_id=1310473946 instance=ExtResource("3_6w7gs")]
 visible = false
 position = Vector2(96, -32)
 collision_layer = 0
-is_locked = true
 is_hidden = true
 collision_toggle = false
 frame_closed = 6
 frame_open = 7
+chest_unique_id = "hidden_chest"
+revealed_by_puzzle_id = "test_switch"
 
 [node name="Chest3" parent="Interactables/Chests" parent_id_path=PackedInt32Array(1367088013) index="2" unique_id=394765704 instance=ExtResource("3_6w7gs")]
 position = Vector2(96, -56)
 item_id = "regen_potion"
 frame_closed = 5
+chest_unique_id = "\"potion_chest\""
+revealed_by_puzzle_id = null
 
 [node name="Chest4" parent="Interactables/Chests" parent_id_path=PackedInt32Array(1367088013) index="3" unique_id=112478252 instance=ExtResource("3_6w7gs")]
 position = Vector2(-24, -8)
 item_id = "bomb"
 item_quantity = 5
+chest_unique_id = null
+revealed_by_puzzle_id = null
 
 [node name="LevelExit" parent="Interactables/LevelExits" parent_id_path=PackedInt32Array(955366397) index="0" unique_id=1439442201 instance=ExtResource("6_5p5iq")]
 position = Vector2(184, -40)
@@ -104,3 +112,4 @@ position = Vector2(80, 0)
 
 [node name="Switch" parent="Interactables/Switches" parent_id_path=PackedInt32Array(1734416711) index="0" unique_id=2028142053 instance=ExtResource("4_5p5iq")]
 position = Vector2(32, -32)
+switch_unique_id = "test_switch"

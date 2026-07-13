@@ -77,10 +77,12 @@ type = 1
 position = Vector2(-8, -800)
 item_id = "magic_torch"
 chest_size = 1
+chest_unique_id = null
 
 [node name="Chest2" parent="Interactables/Chests" parent_id_path=PackedInt32Array(635561518) index="1" unique_id=1868485195 instance=ExtResource("4_y7xr0")]
 position = Vector2(32, -408)
 item_quantity = 3
+chest_unique_id = null
 
 [node name="DoorTransition" parent="Interactables/DoorTransitions" parent_id_path=PackedInt32Array(967577544) index="0" unique_id=1891565103 node_paths=PackedStringArray("target_room_bounds") instance=ExtResource("5_hfy8y")]
 position = Vector2(160, -224)

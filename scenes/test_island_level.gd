@@ -14,7 +14,8 @@ func _ready() -> void:
 	#locked_chest.visible = false
 	#locked_chest.is_hidden = true
 	#locked_chest.set_collision_layer_value(4, false)
-	floor_switch.activated.connect(_switch_activated)
+	#floor_switch.activated.connect(_switch_activated)
+	floor_switch.activated.connect(locked_chest.reveal_chest_by_gameplay)
 	if GlobalPlayerData.has_upgrade("has_torch"):
 		canvas_modulate.lighting_preset = 2
 
@@ -22,10 +23,4 @@ func _switch_activated() -> void:
 	print("A secret chest appeared!")
 	
 	locked_chest.is_locked = false
-	locked_chest.visible = true
-	locked_chest.is_hidden = false
-	locked_chest.set_collision_layer_value(4, true)
-	
-	locked_chest.modulate.a = 0.0
-	var tween = create_tween()
-	tween.tween_property(locked_chest, "modulate:a", 1.0, 0.5)
+	locked_chest.reveal_chest_by_gameplay()

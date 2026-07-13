@@ -9,25 +9,33 @@ extends Area2D
 
 @export var quantity: int = 1
 
+@export_group("Persistence Identifier")
+@export var pickup_unique_id: String = ""
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	body_entered.connect(_on_player_walked_over)
 	_update_pickup_visuals()
 	
 	if not Engine.is_editor_hint():
-		
-		var item_info: Dictionary = ItemDatabase.get_item_data(item_id)
-		var db_scale: float = item_info.get("visual_scale", 1.0)
-		var target_scale_vector: Vector2 = Vector2(db_scale, db_scale)
-		
-		var target_y: float = $Sprite2D.position.y
-		
-		$Sprite2D.position.y -= 12.0
-		$Sprite2D.scale = target_scale_vector * 0.5
-		
-		var tween = create_tween().set_parallel(true)
-		tween.tween_property($Sprite2D, "position:y", target_y, 0.25).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
-		tween.tween_property($Sprite2D, "scale", target_scale_vector, 0.20)
+		if pickup_unique_id != "":
+			var level_name: String = GlobalPlayerData.get_active_level_name()
+			if GlobalPlayerData.has_been_triggered(level_name, pickup_unique_id):
+				queue_free()
+				return
+		else:
+			var item_info: Dictionary = ItemDatabase.get_item_data(item_id)
+			var db_scale: float = item_info.get("visual_scale", 1.0)
+			var target_scale_vector: Vector2 = Vector2(db_scale, db_scale)
+			
+			var target_y: float = $Sprite2D.position.y
+			
+			$Sprite2D.position.y -= 12.0
+			$Sprite2D.scale = target_scale_vector * 0.5
+			
+			var tween = create_tween().set_parallel(true)
+			tween.tween_property($Sprite2D, "position:y", target_y, 0.25).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+			tween.tween_property($Sprite2D, "scale", target_scale_vector, 0.20)
 
 func _update_pickup_visuals() -> void:
 	if is_inside_tree() and has_node("Sprite2D") and has_node("CollisionShape2D"):
@@ -58,6 +66,10 @@ func _on_player_walked_over(body: Node2D) -> void:
 	if Engine.is_editor_hint(): return
 	
 	if body is CharacterBody2D and body.name == "Player":
+		if pickup_unique_id != "":
+			var level_name: String = GlobalPlayerData.get_active_level_name()
+			GlobalPlayerData.register_world_trigger(level_name, pickup_unique_id)
+		
 		GlobalPlayerData.receive_item(item_id, quantity)
 		
 		#pickup sound or effects

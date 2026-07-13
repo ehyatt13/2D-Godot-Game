@@ -3,10 +3,39 @@ extends Node2D
 @onready var dark_chest: Node2D = $Interactables/Chests/Chest2
 @onready var walls_layer: TileMapLayer = $ObjectLayer
 
+@export_group("Puzzle Door Tracking Keys")
+@export var puzzle_wall_unique_id: String = "hidden_dungeon_door_1"
+
+const TARGET_TILE_1: Vector2i = Vector2i(7, -27)
+const TARGET_TILE_2: Vector2i = Vector2i(7, -26)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#pass # Replace with function body.
-	dark_chest.chest_opened.connect(_dark_chest_opened)
+	#dark_chest.chest_opened.connect(_dark_chest_opened)
+	dark_chest.chest_opened.connect(break_puzzle_wall_via_gameplay)
+	_evaluate_puzzle_wall_persistence()
+
+func _evaluate_puzzle_wall_persistence() -> void:
+	if walls_layer and puzzle_wall_unique_id != "":
+		var level_name: String = name
+		if GlobalPlayerData.has_been_triggered(level_name, puzzle_wall_unique_id):
+			print("Persistence Engine: Restoring broken wall path natively on load pass.")
+			walls_layer.set_cell(TARGET_TILE_1, -1)
+			walls_layer.set_cell(TARGET_TILE_2, -1)
+
+func break_puzzle_wall_via_gameplay() -> void:
+	if puzzle_wall_unique_id != "":
+		var level_name: String = name
+		GlobalPlayerData.register_world_trigger(level_name, puzzle_wall_unique_id)
+	
+	if walls_layer:
+		walls_layer.set_cell(TARGET_TILE_1, -1)
+		walls_layer.set_cell(TARGET_TILE_2, -1)
+		
+		#var camera = find_child("Camera2D", true, false)
+		#if camera and camera.has_method("trigger_screen_shake"):
+			#camera.trigger_screen_shake(0.5)
 
 func _dark_chest_opened() -> void:
 	print("Upon opening the chest, the way has been cleared.")

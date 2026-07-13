@@ -187,3 +187,23 @@ func unlock_upgrade(flag_name: String) -> void:
 	if flags.has(flag_name):
 		flags[flag_name] = true
 		print("Permanently unlocked upgrade: ", flag_name)
+
+var world_persistence: Dictionary = {}
+
+func has_been_triggered(level_id: String, object_id: String) -> bool:
+	var unique_key: String = level_id + "_" + object_id
+	return world_persistence.get(unique_key, false)
+
+func register_world_trigger(level_id: String, object_id: String) -> void:
+	var unique_key = level_id + "_" + object_id
+	world_persistence[unique_key] = true
+	print("Persistence Engine: Recorded change -> ", unique_key)
+
+func get_active_level_name() -> String:
+	var root_window = get_tree().root
+	var game_manager = root_window.get_node_or_null("Game")
+	if game_manager:
+		var world_container = game_manager.get_node_or_null("World")
+		if world_container and world_container.get_child_count() > 0:
+			return world_container.get_child(0).name
+	return "GlobalWorld"
