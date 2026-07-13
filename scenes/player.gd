@@ -51,7 +51,7 @@ func _ready() -> void:
 
 func synchronize_active_stats() -> void:
 	speed = GlobalPlayerData.player_speed
-	print("Player Local Sync Completed: Active Speed is now ", speed)
+	#print("Player Local Sync Completed: Active Speed is now ", speed)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("use_item"):
@@ -133,7 +133,7 @@ func _use_equipped_item() -> void:
 		
 		"speed_potion":
 			active_item.id = "empty_bottle"
-			GlobalPlayerData.apply_status_buff("speed_potion", 2.0)
+			GlobalPlayerData.apply_status_buff("speed_potion", 10.0)
 		
 		"regen_potion":
 			active_item.id = "empty_bottle"

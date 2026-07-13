@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://blt0l2o6seghx"]
+
+[ext_resource type="Script" uid="uid://ceyyxbhvgdsnq" path="res://buff_icon_slot.gd" id="1_ojehy"]
+[ext_resource type="Texture2D" uid="uid://wv74pvjk5scu" path="res://assets/lighting/light_gradient.png" id="2_63n0k"]
+
+[node name="BuffIconSlot" type="Control" unique_id=549418447]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 24.0
+offset_bottom = 24.0
+script = ExtResource("1_ojehy")
+
+[node name="IconTexture" type="TextureRect" parent="." unique_id=535455343]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="RadialClock" type="TextureProgressBar" parent="." unique_id=845149187]
+modulate = Color(0.44313726, 1, 0.29803923, 0.50980395)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+fill_mode = 5
+texture_progress = ExtResource("2_63n0k")

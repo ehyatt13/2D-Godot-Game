@@ -43,9 +43,12 @@ y_sort_enabled = true
 [node name="EnemySlime" parent="Entities/Enemies" index="0" unique_id=1678480407 instance=ExtResource("6_77bd2")]
 position = Vector2(-88, -120)
 
-[node name="ItemPickup" parent="Entities/ItemPickups" parent_id_path=PackedInt32Array(179689881) index="0" unique_id=1078076270 instance=ExtResource("5_2lupc")]
-position = Vector2(-24, -88)
-item_id = "bomb"
+[node name="ItemPickups" parent="Entities" parent_id_path=PackedInt32Array(1075964594) index="1" unique_id=179689881]
+y_sort_enabled = true
+
+[node name="ItemPickup" parent="Entities/ItemPickups" index="0" unique_id=1078076270 instance=ExtResource("5_2lupc")]
+position = Vector2(112, -48)
+item_id = "speed_potion"
 
 [node name="Torch" parent="Entities/Torches" parent_id_path=PackedInt32Array(1928232028) index="0" unique_id=132525163 instance=ExtResource("4_w8l34")]
 position = Vector2(8, -48)

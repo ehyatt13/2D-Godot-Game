@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bxa1ayf4xdyjv" path="res://scenes/heart_ui.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://cog7o4xfgoi5o" path="res://scenes/coin_hud.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://jbn5w716sttt" path="res://scenes/transition_overlay.tscn" id="5_p57ef"]
+[ext_resource type="PackedScene" uid="uid://b0206i35iw1vf" path="res://scenes/buff_hud_panel.tscn" id="6_p57ef"]
 
 [node name="Game" type="Node2D" unique_id=469100526]
 script = ExtResource("1_0tnpc")
@@ -30,5 +31,11 @@ offset_bottom = -16.0
 grow_vertical = 0
 
 [node name="TransitionOverlay" parent="CanvasLayer" unique_id=1726820661 groups=["TransitionEngine"] instance=ExtResource("5_p57ef")]
+
+[node name="BuffHUDPanel" parent="CanvasLayer" unique_id=1914171189 instance=ExtResource("6_p57ef")]
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 56.0
+offset_bottom = 88.0
 
 [node name="World" type="Node2D" parent="." unique_id=260470708]

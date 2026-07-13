@@ -5,6 +5,8 @@ signal coins_changed(current_coins: int)
 
 signal atmosphere_changed(preset_index: int)
 
+signal buffs_updated()
+
 var max_health: int = 6:
 	set(value):
 		max_health = clamp(value, 2, 40)
@@ -63,6 +65,8 @@ func apply_status_buff(buff_id: String, duration: float) -> void:
 	if buff_id == "regeneration":
 		_run_regeneration_heartbeat_loop()
 	
+	buffs_updated.emit()
+	
 	while active_buffs.has(buff_id) and active_buffs[buff_id] > 0.0:
 		await get_tree().create_timer(0.1, false).timeout
 		
@@ -73,10 +77,14 @@ func apply_status_buff(buff_id: String, duration: float) -> void:
 				active_buffs.erase(buff_id)
 				print("Buff Matrix: '", buff_id, "' expired.")
 				
-				var active_player = get_tree().get_first_node_in_group("Player")
-				if active_player and is_instance_valid(active_player):
-					if active_player.has_method("synchronize_active_stats"):
-						active_player.synchronize_active_stats()
+				buffs_updated.emit()
+				
+				_force_live_player_stat_sync()
+				break
+				#var active_player = get_tree().get_first_node_in_group("Player")
+				#if active_player and is_instance_valid(active_player):
+					#if active_player.has_method("synchronize_active_stats"):
+						#active_player.synchronize_active_stats()
 				#if live_player and is_instance_valid(live_player) and live_player.has_method("synchronize_active_stats"):
 					#live_player.synchronize_active_stats()
 				#break
