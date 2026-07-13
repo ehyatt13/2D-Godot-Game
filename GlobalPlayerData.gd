@@ -39,6 +39,65 @@ var flags: Dictionary = {
 	"has_torch": false
 }
 
+var active_buffs: Dictionary = {}
+
+const BASE_SPEED = 60
+
+var player_speed: float:
+	get:
+		var current_speed: float = BASE_SPEED
+		if active_buffs.has("speed_potion"):
+			current_speed += 40
+		
+		return current_speed
+
+func apply_status_buff(buff_id: String, duration: float) -> void:
+	print("Buff Matrix: Applying '", buff_id, "' for ", duration, " seconds.")
+	
+	active_buffs[buff_id] = duration
+	#var live_player = get_tree().get_first_node_in_group("Player")
+	#if live_player and live_player.has_method("synchronize_active_stats"):
+		#live_player.synchronize_active_stats()
+	_force_live_player_stat_sync()
+	
+	if buff_id == "regeneration":
+		_run_regeneration_heartbeat_loop()
+	
+	while active_buffs.has(buff_id) and active_buffs[buff_id] > 0.0:
+		await get_tree().create_timer(0.1, false).timeout
+		
+		if active_buffs.has(buff_id):
+			active_buffs[buff_id] -= 0.1
+			
+			if active_buffs[buff_id] <= 0.0:
+				active_buffs.erase(buff_id)
+				print("Buff Matrix: '", buff_id, "' expired.")
+				
+				var active_player = get_tree().get_first_node_in_group("Player")
+				if active_player and is_instance_valid(active_player):
+					if active_player.has_method("synchronize_active_stats"):
+						active_player.synchronize_active_stats()
+				#if live_player and is_instance_valid(live_player) and live_player.has_method("synchronize_active_stats"):
+					#live_player.synchronize_active_stats()
+				#break
+
+func _force_live_player_stat_sync() -> void:
+	var active_player = get_tree().get_first_node_in_group("Player")
+	if active_player and is_instance_valid(active_player):
+		if active_player.has_method("synchronize_active_stats"):
+			active_player.synchronize_active_stats()
+
+func _run_regeneration_heartbeat_loop() -> void:
+	while active_buffs.has("regeneration") and active_buffs["regeneration"] > 0.0:
+		await get_tree().create_timer(2.0, false).timeout
+		if active_buffs.has("regeneration") and active_buffs["regeneration"] > 0.0:
+			if health <= 0:
+				active_buffs.erase("regeneration")
+				break
+			
+			health += 1
+			print("Global Buff Tick: Healed 1 HP. Total Health: ", health, "/", max_health)
+
 var selectable_items: Array[ItemData] = []
 var equipped_item_index: int = -1
 

@@ -57,10 +57,12 @@ func _refresh_menu_display() -> void:
 		
 		var cell_width: float = master_texture.get_width() / float(atlas_config["hframes"])
 		var cell_height: float = master_texture.get_height() / float(atlas_config["vframes"])
+		#print(cell_width, cell_height)
 		
 		var frame: int = item_info["frame"]
 		var column: int = frame % atlas_config["hframes"]
-		var row: int = frame / atlas_config["vframes"]
+		var row: int = frame / atlas_config["hframes"]
+		#print("Row : ", row, ", Column: ", column)
 		
 		var slice_region: Rect2 = Rect2(column * cell_width, row * cell_height, cell_width, cell_height)
 		

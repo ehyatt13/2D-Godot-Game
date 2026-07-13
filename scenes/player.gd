@@ -2,9 +2,11 @@ extends CharacterBody2D
 
 #const SPEED = 60
 
-@export_group("General")
-## Speed of the player
-@export var speed: float = 60.0
+#@export_group("General")
+### Speed of the player
+#@export var speed: float = 60.0
+
+var speed: float = 60.0
 
 @export_group("Jump")
 
@@ -37,6 +39,7 @@ var is_attacking: bool = false
 var current_face_direction: Vector2 = Vector2(0, 1)
 
 func _ready() -> void:	
+	add_to_group("Player")
 	animation_tree.active = true
 	
 	animation_tree.set("parameters/Idle/blend_position", Vector2(0, 1))
@@ -44,6 +47,11 @@ func _ready() -> void:
 	
 	interaction_zone.body_entered.connect(_on_interactable_entered)
 	interaction_zone.body_exited.connect(_on_interactable_exited)
+	synchronize_active_stats()
+
+func synchronize_active_stats() -> void:
+	speed = GlobalPlayerData.player_speed
+	print("Player Local Sync Completed: Active Speed is now ", speed)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("use_item"):
@@ -111,12 +119,28 @@ func _use_equipped_item() -> void:
 	
 	var active_item: ItemData = GlobalPlayerData.selectable_items[GlobalPlayerData.equipped_item_index]
 	
-	if active_item.id == "bomb":
-		if GlobalPlayerData.bombs > 0:
-			GlobalPlayerData.bombs -= 1
-			_spawn_bomb_in_world()
-		else:
-			print("Out of bombs!")
+	match active_item.id:
+		"bomb":
+			if GlobalPlayerData.bombs > 0:
+				GlobalPlayerData.bombs -= 1
+				_spawn_bomb_in_world()
+			else:
+				print("Out of bombs!")
+		
+		"health_potion":
+			GlobalPlayerData.health += 6
+			active_item.id = "empty_bottle"
+		
+		"speed_potion":
+			active_item.id = "empty_bottle"
+			GlobalPlayerData.apply_status_buff("speed_potion", 2.0)
+		
+		"regen_potion":
+			active_item.id = "empty_bottle"
+			#for i in 6:
+				#await get_tree().create_timer(2.0, false).timeout
+				#GlobalPlayerData.health += 1
+			GlobalPlayerData.apply_status_buff("regeneration", 12.0)
 
 func _spawn_bomb_in_world() -> void:
 	var new_bomb = bomb_scene.instantiate()

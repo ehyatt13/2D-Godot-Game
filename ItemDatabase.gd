@@ -21,6 +21,11 @@ const ATLAS_SHEETS: Dictionary = {
 		"path": "res://assets/sprites/player_torch.png",
 		"hframes": 2,
 		"vframes": 1
+	},
+	"potions": {
+		"path": "res://assets/sprites/potions.png",
+		"hframes": 3,
+		"vframes": 2
 	}
 }
 
@@ -81,6 +86,30 @@ const ITEMS: Dictionary = {
 		"behavior": "flag",
 		"target_flag": "has_torch",
 		"animation_name": "torch_flicker"
+	},
+	"empty_bottle": {
+		"name": "Empty Bottle",
+		"frame": 0,
+		"atlas": "potions",
+		"behavior": "selectable"
+	},
+	"health_potion": {
+		"name": "Health Potion",
+		"frame": 1,
+		"atlas": "potions",
+		"behavior": "selectable"
+	},
+	"speed_potion": {
+		"name": "Swiftness Potion",
+		"frame": 4,
+		"atlas": "potions",
+		"behavior": "selectable"
+	},
+	"regen_potion": {
+		"name": "Regeneration Potion",
+		"frame": 5,
+		"atlas": "potions",
+		"behavior": "selectable"
 	}
 }
 

@@ -36,6 +36,7 @@ window/snap/snap_2d_transforms_to_pixel=false
 [global_group]
 
 TransitionEngine=""
+Player=""
 
 [input]
 

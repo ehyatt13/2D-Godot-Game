@@ -75,7 +75,6 @@ chest_size = 1
 visible = false
 position = Vector2(96, -32)
 collision_layer = 0
-item_id = "gold_coin"
 is_locked = true
 is_hidden = true
 collision_toggle = false
@@ -84,7 +83,7 @@ frame_open = 7
 
 [node name="Chest3" parent="Interactables/Chests" parent_id_path=PackedInt32Array(1367088013) index="2" unique_id=394765704 instance=ExtResource("3_6w7gs")]
 position = Vector2(96, -56)
-item_id = "crystal"
+item_id = "regen_potion"
 frame_closed = 5
 
 [node name="Chest4" parent="Interactables/Chests" parent_id_path=PackedInt32Array(1367088013) index="3" unique_id=112478252 instance=ExtResource("3_6w7gs")]
