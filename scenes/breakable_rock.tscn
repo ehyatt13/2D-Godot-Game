@@ -13,6 +13,7 @@ collision_mask = 0
 script = ExtResource("1_7f0rj")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=685472248]
+y_sort_enabled = true
 texture = ExtResource("2_art48")
 offset = Vector2(0, -8)
 hframes = 10

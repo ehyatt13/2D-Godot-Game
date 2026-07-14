@@ -26,16 +26,25 @@ func _evaluate_all_tilemap_puzzle_persistence() -> void:
 	for cell in cells_to_erase:
 		walls_layer.set_cell(cell, -1)
 
-func shatter_tile_via_bomb(impact_coords: Vector2i) -> void:
+func shatter_tile_via_bomb(impact_cells_array: Array[Vector2i]) -> void:
 	if not walls_layer: return
 	
-	var epicenter_data: TileData = walls_layer.get_cell_tile_data(impact_coords)
-	if not epicenter_data or epicenter_data.get_custom_data("puzzle_id") == "": return
+	var target_epicenter: Vector2i = Vector2i(-9999, -9999)
+	var puzzle_tag: String = ""
 	
-	var puzzle_tag: String = epicenter_data.get_custom_data("puzzle_id")
+	for cell in impact_cells_array:
+		var tile_data: TileData = walls_layer.get_cell_tile_data(cell)
+		if tile_data:
+			var check_tag: String = tile_data.get_custom_data("puzzle_id")
+			if check_tag != "":
+				target_epicenter = cell
+				puzzle_tag = check_tag
+				break
+	
+	if puzzle_tag == "": return
+	
 	var level_name: String = name
-	
-	var tiles_to_check: Array[Vector2i] = [impact_coords]
+	var tiles_to_check: Array[Vector2i] = [target_epicenter]
 	var tiles_to_destroy: Array[Vector2i] = []
 	
 	while not tiles_to_check.is_empty():

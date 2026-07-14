@@ -144,7 +144,7 @@ func _spawn_bomb_in_world() -> void:
 	
 	var spawn_offset: Vector2 = current_face_direction * 10.0
 	var absolute_target_position: Vector2 = global_position + spawn_offset
-	new_bomb.global_position = absolute_target_position
+	new_bomb.global_position = absolute_target_position #+ Vector2(0.0, 6.0)
 	#if "last_direction" in self:
 		#match last_direction:
 			#"down": spawn_offset = Vector2(0, 16)
@@ -152,23 +152,14 @@ func _spawn_bomb_in_world() -> void:
 			#"left": spawn_offset = Vector2(-16, 0)
 			#"right": spawn_offset = Vector2(16, 0)
 	
-	var root_node = get_tree().root
-	var game_manager = root_node.get_node_or_null("Game")
-	
-	if game_manager:
-		var world_container = game_manager.get_node_or_null("World")
-		if world_container and world_container.get_child_count() > 0:
-			var current_level_map = world_container.get_child(0)
-			
-			var target_folder = current_level_map.get_node_or_null("Interactables")
-			
-			if target_folder:
-				target_folder.add_child(new_bomb)
-				print("Successfully spawned the bomb!")
-				return
-	
-	get_parent().add_child(new_bomb)
-	print("Warning: 'Interactables' folder not found. Spawned on Level Root instead.")
+	var active_map = get_parent().get_parent()
+	if active_map:
+		var target_folder = active_map.get_node_or_null("Interactables")
+		
+		if target_folder:
+			#print("still works")
+			target_folder.add_child(new_bomb)
+			target_folder.move_child(new_bomb, -1)
 
 func take_damage(amount: int) -> void:
 	if is_invincible:

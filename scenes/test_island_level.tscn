@@ -38,7 +38,7 @@ tile_map_data = PackedByteArray("AAALAP3/AAAIAAAAAAA=")
 tile_map_data = PackedByteArray("AAACAP//AAAAAAUAAAA=")
 
 [node name="RoofLayer" parent="TileMapLayers" parent_id_path=PackedInt32Array(1319613757) index="4" unique_id=1614030950]
-tile_map_data = PackedByteArray("AAAKAPz/AAAJAAIAAAALAPz/AAAJAAIAAAAMAPz/AAAJAAIAAAA=")
+tile_map_data = PackedByteArray("AAAKAPz/AAAJAAIAAAALAPz/AAAJAAIAAAAMAPz/AAAJAAIAAAAKAPv/AAAJAAIAAAALAPv/AAAJAAIAAAAMAPv/AAAJAAIAAAA=")
 
 [node name="BreakableBush" parent="Interactables/Bushes" parent_id_path=PackedInt32Array(1400179162) index="0" unique_id=1748466605 instance=ExtResource("10_eo2a4")]
 position = Vector2(16, -16)
