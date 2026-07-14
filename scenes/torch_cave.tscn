@@ -22,6 +22,9 @@ tile_map_data = PackedByteArray("AAD///7/AAAGAAEAAAD/////AAAGAAEAAAD//wAAAAAGAAE
 [node name="ObjectLayer" parent="TileMapLayers" parent_id_path=PackedInt32Array(1319613757) index="2" unique_id=1638433165]
 tile_map_data = PackedByteArray("AAD//wIAAAAJAAIAAAA=")
 
+[node name="PuzzleLayer" parent="TileMapLayers" parent_id_path=PackedInt32Array(1319613757) index="3" unique_id=203912799]
+tile_map_data = PackedByteArray("AAAHAOX/AAAIAAIAAAAHAOb/AAAIAAIAAAA=")
+
 [node name="Torch" parent="Entities/Torches" parent_id_path=PackedInt32Array(1307406241) index="0" unique_id=132525163 instance=ExtResource("2_y7xr0")]
 position = Vector2(-32, -72)
 type = 1
@@ -113,5 +116,6 @@ offset_right = 224.0
 offset_bottom = -240.0
 
 [node name="CanvasModulate" parent="." index="4" unique_id=2083025762]
+visible = false
 color = Color(0, 0, 0, 1)
 lighting_preset = 3
