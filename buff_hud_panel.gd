@@ -23,7 +23,3 @@ func synchronize_buff_display_row() -> void:
 			
 			var duration_length: float = GlobalPlayerData.active_buffs[buff_key]
 			new_slot.initialize_slot(buff_key, duration_length)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

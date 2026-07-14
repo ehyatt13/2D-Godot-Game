@@ -23,7 +23,6 @@ enum ChestSize {
 	set(value):
 		is_hidden = value
 		visible = !value
-		#set_collision_layer_value(4, visible)
 
 @export var collision_toggle: bool = true:
 	set(value):
@@ -117,24 +116,6 @@ func _update_chest_sprite_visuals() -> void:
 		var horizontal_offset_x: float = 32 * current_frame_index
 		var vertical_offset_y: float = 0.0 if chest_size == ChestSize.NORMAL else 32.0
 		sprite.region_rect = Rect2(horizontal_offset_x, vertical_offset_y, 32, 16)
-
-#func _update_chest_item_visuals() -> void:
-	#if is_inside_tree() and has_node("ItemRewardSprite"):
-		#var item_data: Dictionary = ItemDatabase.get_item_data(item_id)
-		#if not item_data.is_empty():
-			#var atlas_key: String = item_data["atlas"]
-			#if ItemDatabase.ATLAS_SHEETS.has(atlas_key):
-				#var atlas_config: Dictionary = ItemDatabase.ATLAS_SHEETS[atlas_key]
-				#var sheet_path: String = atlas_config["path"]
-				#if ResourceLoader.exists(sheet_path):
-					#$ItemRewardSprite.hframes = atlas_config["hframes"]
-					#$ItemRewardSprite.vframes = atlas_config["vframes"]
-					#$ItemRewardSprite.texture = load(sheet_path)
-			#$"ItemRewardSprite".frame = item_data["frame"]
-			#var scale_factor: float = item_data.get("visual_scale", 1.0)
-			#$"ItemRewardSprite".scale = Vector2(scale_factor, scale_factor)
-		#else:
-			#$"ItemRewardSprite".frame = 0
 
 func _recalibrate_physics_hitboxes() -> void:
 	if not is_inside_tree() or not collision_shape or not interaction_shape: return
