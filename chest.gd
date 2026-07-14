@@ -132,14 +132,14 @@ func _recalibrate_physics_hitboxes() -> void:
 	if shape_template is RectangleShape2D and interaction_template is RectangleShape2D:
 		match chest_size:
 			ChestSize.NORMAL:
-				sprite.position = Vector2.ZERO
+				sprite.position = Vector2(0.0, -8.0)
 				shape_template.size = Vector2(16.0, 8.0)
 				collision_shape.position = Vector2(0.0, -4.0)
 				interaction_template.size = Vector2(20.0, 12.0)
 				interaction_shape.position = Vector2(0.0, -4.0)
 				
 			ChestSize.BIG:
-				sprite.position = Vector2(8.0, 0.0)
+				sprite.position = Vector2(8.0, -8.0)
 				shape_template.size = Vector2(32.0, 8.0)
 				collision_shape.position = Vector2(8.0, -4.0)
 				interaction_template.size = Vector2(36.0, 12.0)

@@ -1,7 +1,7 @@
 extends StaticBody2D
 
 
-func take_damage(amount: int) -> void:
+func take_damage(_amount: int) -> void:
 	#particle effect or dust cloud
 	
 	print("A solid boulder shattered into dust!")
