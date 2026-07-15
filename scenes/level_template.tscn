@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cj240llolj0sc"]
 
-[ext_resource type="Script" uid="uid://df5scnt80re8i" path="res://base_level.gd" id="1_un07w"]
+[ext_resource type="Script" uid="uid://df5scnt80re8i" path="res://scripts/base_level.gd" id="1_un07w"]
 [ext_resource type="Script" uid="uid://6wx1yx6hrjdm" path="res://scenes/camera_2d.gd" id="2_t0jqh"]
 [ext_resource type="Shader" uid="uid://cccispynu0lgf" path="res://scenes/level_template.gdshader" id="3_hj7jb"]
 [ext_resource type="Script" uid="uid://eqbgi1ivjubu" path="res://scenes/weather_controller.gd" id="4_h2vd2"]

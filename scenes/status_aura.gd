@@ -20,7 +20,7 @@ func initialize_aura(buff_id: String) -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not GlobalPlayerData.active_buffs.has(target_buff_id):
 		emitting = false
 		var t = create_tween()

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bgv3vgp1aec4d"]
 
-[ext_resource type="Script" uid="uid://bsg8m0m51dkam" path="res://bomb.gd" id="1_4kkau"]
+[ext_resource type="Script" uid="uid://bsg8m0m51dkam" path="res://scripts/bomb.gd" id="1_4kkau"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vpdcx"]
 load_path = "res://.godot/imported/bomb.png-582a23d1dce9175afe43059a30aaded8.ctex"

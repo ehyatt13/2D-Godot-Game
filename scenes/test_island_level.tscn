@@ -59,6 +59,7 @@ chest_size = 1
 visible = false
 position = Vector2(96, -32)
 collision_layer = 0
+item_id = "heart_upgrade"
 is_hidden = true
 collision_toggle = false
 frame_closed = 6

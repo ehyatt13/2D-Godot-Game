@@ -13,7 +13,7 @@ func _update_heart_display(current_health: int, max_health: int) -> void:
 	for child in get_children():
 		child.queue_free()
 	
-	var total_hearts: int = max_health / 2
+	var total_hearts: int = floori(max_health / 2)
 	
 	for i in range(total_hearts):
 		var new_heart_slot: TextureRect = TextureRect.new()

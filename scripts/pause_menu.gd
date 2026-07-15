@@ -13,7 +13,7 @@ var last_focused_index: int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visible = false
-	GlobalPlayerData.coins_changed.connect(func(amt): _refresh_menu_display())
+	GlobalPlayerData.coins_changed.connect(func(_amt): _refresh_menu_display())
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause_game"):
@@ -233,7 +233,7 @@ func _on_slot_focused(slot_node: TextureButton, title: String, description: Stri
 	selection_border.offset_right = -2
 	selection_border.offset_bottom = -2
 
-func _on_slot_focus_lost(slot_node: TextureButton, index: int) -> void:
+func _on_slot_focus_lost(slot_node: TextureButton, _index: int) -> void:
 	slot_node.self_modulate = Color(1.0, 1.0, 1.0, 1.0)
 	description_label.text = ""
 	

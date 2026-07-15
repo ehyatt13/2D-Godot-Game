@@ -218,7 +218,7 @@ func _spawn_loot_popup_visuals() -> void:
 		var reward_light: PointLight2D = PointLight2D.new()
 		reward_light.texture = load("res://assets/lighting/light_gradient.png")
 		reward_light.color = Color(1.0, 0.6, 0.3, 1.0)
-		var flicker_script = load("res://flickering_light.gd")
+		var flicker_script = load("res://scripts/flickering_light.gd")
 		reward_light.set_script(flicker_script)
 		reward_light.is_environment_light = true
 		reward_light.base_energy = 0.8

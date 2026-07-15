@@ -36,7 +36,7 @@ func initialize_slot(buff_id: String, max_time: float) -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not GlobalPlayerData.active_buffs.has(target_buff_id):
 		queue_free()
 		return

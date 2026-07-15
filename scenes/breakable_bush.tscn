@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cgc2lb20c5aij"]
 
-[ext_resource type="Script" uid="uid://tm4eqme05nq0" path="res://breakable_bush.gd" id="1_cwgm0"]
+[ext_resource type="Script" uid="uid://tm4eqme05nq0" path="res://scripts/breakable_bush.gd" id="1_cwgm0"]
 [ext_resource type="Texture2D" uid="uid://ctkv8fa2tsukm" path="res://assets/sprites/bush.png" id="2_y1hj3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sj5e7"]

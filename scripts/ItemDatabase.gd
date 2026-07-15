@@ -104,7 +104,7 @@ const ITEMS: Dictionary = {
 	},
 	"speed_potion": {
 		"name": "Swiftness Potion",
-		"frame": 4,
+		"frame": 3,
 		"atlas": "potions",
 		"behavior": "selectable",
 		"description": "A potion that increases movement speed for a brief period."

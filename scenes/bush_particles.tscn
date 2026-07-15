@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cc5arlu1tj4mo"]
 
-[ext_resource type="Script" uid="uid://davoirdopvhx" path="res://bush_particles.gd" id="1_bpekn"]
+[ext_resource type="Script" uid="uid://davoirdopvhx" path="res://scripts/bush_particles.gd" id="1_bpekn"]
 
 [sub_resource type="Gradient" id="Gradient_sj5e7"]
 colors = PackedColorArray(0.14117648, 0.62352943, 0.22745098, 1, 0.08235294, 0.23921569, 0.039215688, 0)

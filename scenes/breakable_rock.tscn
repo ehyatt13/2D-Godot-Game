@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bjqna6o8x1ssf"]
 
-[ext_resource type="Script" uid="uid://c6cisais16676" path="res://breakable_rock.gd" id="1_7f0rj"]
+[ext_resource type="Script" uid="uid://c6cisais16676" path="res://scripts/breakable_rock.gd" id="1_7f0rj"]
 [ext_resource type="Texture2D" uid="uid://b0ue0u51mrcee" path="res://assets/sprites/tileset1-16.png" id="2_art48"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sj5e7"]

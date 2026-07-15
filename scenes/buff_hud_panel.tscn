@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b0206i35iw1vf"]
 
-[ext_resource type="Script" uid="uid://1tp08xjruoum" path="res://buff_hud_panel.gd" id="1_g5i70"]
+[ext_resource type="Script" uid="uid://1tp08xjruoum" path="res://scripts/buff_hud_panel.gd" id="1_g5i70"]
 
 [node name="BuffHUDPanel" type="HBoxContainer" unique_id=1914171189]
 custom_minimum_size = Vector2(0, 24)

@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://d0t2227bm12id" path="res://assets/sprites/player.png" id="1_3kbl1"]
 [ext_resource type="Script" uid="uid://ci34vvygyttcs" path="res://scenes/player.gd" id="1_x1q6f"]
 [ext_resource type="Texture2D" uid="uid://b7r3xfdsgya4m" path="res://assets/sprites/new_player_4d.png" id="2_dqkch"]
-[ext_resource type="Script" uid="uid://bo1aweo4fku1l" path="res://flickering_light.gd" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://bo1aweo4fku1l" path="res://scripts/flickering_light.gd" id="4_dqkch"]
 [ext_resource type="Texture2D" uid="uid://wv74pvjk5scu" path="res://assets/lighting/light_gradient.png" id="4_qlg0r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p57ef"]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ucg86bqpdr4m"]
 
-[ext_resource type="Script" uid="uid://cjtn8qpqrpjlu" path="res://switch.gd" id="1_e08h5"]
+[ext_resource type="Script" uid="uid://cjtn8qpqrpjlu" path="res://scripts/switch.gd" id="1_e08h5"]
 [ext_resource type="Texture2D" uid="uid://b5y1xmqsve0qm" path="res://assets/sprites/chests.png" id="2_nnoiq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sj5e7"]

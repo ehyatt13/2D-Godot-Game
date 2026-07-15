@@ -131,6 +131,8 @@ func receive_item(item_id: String, quantity: int) -> void:
 			
 			var target_stat: String = item_info["target_stat"]
 			if target_stat in self:
+				if target_stat == "max_health":
+					quantity *= 2
 				self[target_stat] += quantity
 		
 		"flag":

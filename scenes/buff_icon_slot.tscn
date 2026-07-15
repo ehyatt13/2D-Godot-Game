@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://blt0l2o6seghx"]
 
-[ext_resource type="Script" uid="uid://ceyyxbhvgdsnq" path="res://buff_icon_slot.gd" id="1_ojehy"]
+[ext_resource type="Script" uid="uid://ceyyxbhvgdsnq" path="res://scripts/buff_icon_slot.gd" id="1_ojehy"]
 [ext_resource type="Texture2D" uid="uid://wv74pvjk5scu" path="res://assets/lighting/light_gradient.png" id="2_63n0k"]
 
 [node name="BuffIconSlot" type="Control" unique_id=549418447]
