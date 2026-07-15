@@ -26,6 +26,8 @@ var is_jumping: bool = false
 
 @onready var bomb_scene: PackedScene = preload("res://scenes/bomb.tscn")
 
+const STATUS_AURA_PREFAB: PackedScene = preload("res://scenes/status_aura.tscn")
+
 @onready var sword_hitbox: Area2D = $"SwordHitbox"
 @onready var sword_shape: CollisionShape2D = $"SwordHitbox/CollisionShape2D"
 
@@ -54,6 +56,17 @@ func _ready() -> void:
 func synchronize_active_stats() -> void:
 	speed = GlobalPlayerData.player_speed
 	#print("Player Local Sync Completed: Active Speed is now ", speed)
+	for buff_key in GlobalPlayerData.active_buffs.keys():
+		var already_has_aura: bool = false
+		for child in get_children():
+			if "target_buff_id" in child and child.target_buff_id == buff_key:
+				already_has_aura = true
+				break
+		
+		if not already_has_aura:
+			var new_aura = STATUS_AURA_PREFAB.instantiate()
+			add_child(new_aura)
+			new_aura.initialize_aura(buff_key)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("use_item"):

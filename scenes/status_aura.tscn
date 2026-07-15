@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://04aopp8ywa8j"]
+
+[ext_resource type="Texture2D" uid="uid://drhno382i86ru" path="res://assets/sprites/circle_glow_particle.png" id="1_f6q1l"]
+[ext_resource type="Script" uid="uid://d00cqli6tuxaj" path="res://scenes/status_aura.gd" id="2_nagjg"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sj5e7"]
+blend_mode = 1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q28f4"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 6.0
+gravity = Vector3(0, -20, 0)
+scale_min = 0.25
+color = Color(0.3372549, 0.7294118, 1, 1)
+
+[node name="StatusAura" type="GPUParticles2D" unique_id=655839971]
+z_index = -1
+material = SubResource("CanvasItemMaterial_sj5e7")
+texture = ExtResource("1_f6q1l")
+process_material = SubResource("ParticleProcessMaterial_q28f4")
+script = ExtResource("2_nagjg")
