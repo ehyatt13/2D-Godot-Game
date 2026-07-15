@@ -51,7 +51,7 @@ position = Vector2(64, -56)
 
 [node name="Chest" parent="Interactables/Chests" parent_id_path=PackedInt32Array(1491622138) index="0" unique_id=1107813732 instance=ExtResource("3_6w7gs")]
 position = Vector2(64, -32)
-item_id = "heart_upgrade"
+item_id = "magic_torch"
 item_quantity = 2
 chest_size = 1
 

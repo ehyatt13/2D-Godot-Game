@@ -10,7 +10,14 @@ func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is CharacterBody2D:
-		var game_manager = get_tree().root.get_node_or_null("Game")
-		if game_manager:
-			game_manager.change_level(target_level_path, spawn_coordinates)
+	if body is CharacterBody2D and body.name == "Player":
+		var overlay = get_tree().get_first_node_in_group("TransitionEngine")
+		if overlay:
+			overlay.play_iris_cut_transition(body, target_level_path, spawn_coordinates)
+		#var game_manager = get_tree().root.get_node_or_null("Game")
+		#if game_manager:
+			##game_manager.change_level(target_level_path, spawn_coordinates)
+			#GlobalPlayerData.preserved_facing_direction = body.current_face_direction
+			##print(body.current_face_direction)
+			#game_manager.execute_clean_map_switch(target_level_path, spawn_coordinates)
+		

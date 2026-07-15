@@ -36,14 +36,16 @@ var is_invincible: bool = false
 
 var is_attacking: bool = false
 
-var current_face_direction: Vector2 = Vector2(0, 1)
+var current_face_direction: Vector2 = GlobalPlayerData.preserved_facing_direction
 
 func _ready() -> void:	
 	add_to_group("Player")
 	animation_tree.active = true
 	
-	animation_tree.set("parameters/Idle/blend_position", Vector2(0, 1))
-	animation_tree.set("parameters/Walk/blend_position", Vector2(0, 1))
+	current_face_direction = GlobalPlayerData.preserved_facing_direction
+	
+	animation_tree.set("parameters/Idle/blend_position", current_face_direction)
+	animation_tree.set("parameters/Walk/blend_position", current_face_direction)
 	
 	interaction_zone.body_entered.connect(_on_interactable_entered)
 	interaction_zone.body_exited.connect(_on_interactable_exited)

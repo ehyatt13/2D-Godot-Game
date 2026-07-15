@@ -7,7 +7,8 @@ var current_level_node: Node2D = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	change_level("res://scenes/test_island_level.tscn", Vector2(0.0, 0.0))
+	#change_level("res://scenes/test_island_level.tscn", Vector2(0.0, 0.0))
+	execute_clean_map_switch("res://scenes/test_island_level.tscn", Vector2(0.0, 0.0))
 
 func change_level(level_path: String, spawn_position: Vector2) -> void:
 	if current_level_node:
@@ -40,3 +41,28 @@ func change_level(level_path: String, spawn_position: Vector2) -> void:
 			var player_light = player_instance.get_node_or_null("PointLight2D")
 			if player_light and player_light.has_method("force_initial_preset"):
 				player_light.force_initial_preset(modulator.lighting_preset)
+
+func execute_clean_map_switch(new_map_path: String, spawn_coordinates: Vector2) -> void:
+	var map_prefab: PackedScene = load(new_map_path)
+	var map_instance = map_prefab.instantiate()
+	
+	var camera_node = map_instance.find_child("Camera2D", true, false)
+	var entities_folder = map_instance.find_child("Entities", true, false)
+	var player_instance = player_scene.instantiate()
+	player_instance.global_position = spawn_coordinates
+	entities_folder.add_child(player_instance)
+	camera_node.player_target = player_instance
+	camera_node.global_position = spawn_coordinates
+	camera_node.reset_physics_interpolation()
+	camera_node.force_update_scroll()
+	camera_node.reset_smoothing()
+	var modulator = map_instance.get_node_or_null("CanvasModulate")
+	
+	for child in world_container.get_children():
+		child.queue_free()
+		await child.tree_exited
+	world_container.add_child(map_instance)
+	if modulator and "lighting_preset" in modulator:
+		var player_light = player_instance.get_node_or_null("PointLight2D")
+		if player_light and player_light.has_method("force_initial_preset"):
+			player_light.force_initial_preset(modulator.lighting_preset)
