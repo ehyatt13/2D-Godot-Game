@@ -6,21 +6,22 @@
 [ext_resource type="PackedScene" uid="uid://cog7o4xfgoi5o" path="res://scenes/coin_hud.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://jbn5w716sttt" path="res://scenes/transition_overlay.tscn" id="5_p57ef"]
 [ext_resource type="PackedScene" uid="uid://b0206i35iw1vf" path="res://scenes/buff_hud_panel.tscn" id="6_p57ef"]
+[ext_resource type="PackedScene" uid="uid://vknyenxkhx77" path="res://scenes/select_menu.tscn" id="7_u5sy4"]
 
 [node name="Game" type="Node2D" unique_id=469100526]
 script = ExtResource("1_0tnpc")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=558945680]
+[node name="World" type="Node2D" parent="." unique_id=260470708]
 
-[node name="PauseMenu" parent="CanvasLayer" unique_id=1886712646 instance=ExtResource("2_yqjtg")]
+[node name="HUDCanvas" type="CanvasLayer" parent="." unique_id=558945680]
 
-[node name="HeartUI" parent="CanvasLayer" unique_id=1216464467 instance=ExtResource("3_lnu2h")]
+[node name="HeartUI" parent="HUDCanvas" unique_id=1216464467 instance=ExtResource("3_lnu2h")]
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 72.0
 offset_bottom = 32.0
 
-[node name="CoinHUD" parent="CanvasLayer" unique_id=2147129987 instance=ExtResource("4_lbhrr")]
+[node name="CoinHUD" parent="HUDCanvas" unique_id=2147129987 instance=ExtResource("4_lbhrr")]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -30,12 +31,18 @@ offset_right = 80.0
 offset_bottom = -16.0
 grow_vertical = 0
 
-[node name="TransitionOverlay" parent="CanvasLayer" unique_id=1726820661 groups=["TransitionEngine"] instance=ExtResource("5_p57ef")]
-
-[node name="BuffHUDPanel" parent="CanvasLayer" unique_id=1914171189 instance=ExtResource("6_p57ef")]
+[node name="BuffHUDPanel" parent="HUDCanvas" unique_id=1914171189 instance=ExtResource("6_p57ef")]
 offset_left = 16.0
 offset_top = 48.0
 offset_right = 56.0
 offset_bottom = 88.0
 
-[node name="World" type="Node2D" parent="." unique_id=260470708]
+[node name="InventoryCanvas" type="CanvasLayer" parent="." unique_id=519417440]
+layer = 2
+
+[node name="PauseMenu" parent="InventoryCanvas" unique_id=1886712646 groups=["PauseMenu"] instance=ExtResource("2_yqjtg")]
+
+[node name="SelectMenu" parent="." unique_id=1744639701 instance=ExtResource("7_u5sy4")]
+layer = 3
+
+[node name="TransitionOverlay" parent="." unique_id=1726820661 groups=["TransitionEngine"] instance=ExtResource("5_p57ef")]
