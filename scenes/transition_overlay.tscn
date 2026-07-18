@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://jbn5w716sttt"]
 
-[ext_resource type="Script" uid="uid://t821xccwlgeu" path="res://scenes/transition_overlay.gd" id="1_5j3xt"]
+[ext_resource type="Script" uid="uid://t821xccwlgeu" path="res://scripts/transition_overlay.gd" id="1_5j3xt"]
 [ext_resource type="Shader" uid="uid://cfv55a0gn1mwa" path="res://assets/shaders/diamond_transition.gdshader" id="1_rr7ak"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sj5e7"]

@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://cj240llolj0sc"]
 
 [ext_resource type="Script" uid="uid://df5scnt80re8i" path="res://scripts/base_level.gd" id="1_un07w"]
-[ext_resource type="Script" uid="uid://6wx1yx6hrjdm" path="res://scenes/camera_2d.gd" id="2_t0jqh"]
+[ext_resource type="Script" uid="uid://6wx1yx6hrjdm" path="res://scripts/camera_2d.gd" id="2_t0jqh"]
 [ext_resource type="Shader" uid="uid://cccispynu0lgf" path="res://scenes/level_template.gdshader" id="3_hj7jb"]
-[ext_resource type="Script" uid="uid://eqbgi1ivjubu" path="res://scenes/weather_controller.gd" id="4_h2vd2"]
+[ext_resource type="Script" uid="uid://eqbgi1ivjubu" path="res://scripts/weather_controller.gd" id="4_h2vd2"]
 [ext_resource type="Texture2D" uid="uid://b0ue0u51mrcee" path="res://assets/sprites/tileset1-16.png" id="5_8yqn4"]
 [ext_resource type="Texture2D" uid="uid://b5y1xmqsve0qm" path="res://assets/sprites/chests.png" id="6_88dq5"]
 [ext_resource type="Texture2D" uid="uid://cijr3fhconx3u" path="res://assets/sprites/objects.png" id="7_84d7x"]
 [ext_resource type="Texture2D" uid="uid://dq5scqnc74m2l" path="res://assets/sprites/torch.png" id="8_gw8yf"]
-[ext_resource type="Script" uid="uid://nru1k5ffi78q" path="res://scenes/atmosphere_controller.gd" id="9_2e8ei"]
+[ext_resource type="Script" uid="uid://nru1k5ffi78q" path="res://scripts/atmosphere_controller.gd" id="9_2e8ei"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a67nr"]
 shader = ExtResource("3_hj7jb")
@@ -409,6 +409,9 @@ y_sort_enabled = true
 y_sort_enabled = true
 
 [node name="DoorTransitions" type="Node2D" parent="Interactables" unique_id=46272831]
+
+[node name="Hazards" type="Node2D" parent="Interactables" unique_id=671866508]
+y_sort_enabled = true
 
 [node name="LevelExits" type="Node2D" parent="Interactables" unique_id=688496339]
 

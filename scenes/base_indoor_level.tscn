@@ -1,13 +1,13 @@
 [gd_scene format=4 uid="uid://bgw0tkuq44kfi"]
 
-[ext_resource type="Script" uid="uid://6wx1yx6hrjdm" path="res://scenes/camera_2d.gd" id="1_qolj3"]
+[ext_resource type="Script" uid="uid://6wx1yx6hrjdm" path="res://scripts/camera_2d.gd" id="1_qolj3"]
 [ext_resource type="Shader" uid="uid://baoaujvoyxfdk" path="res://scenes/base_level_template.gdshader" id="2_20eqo"]
-[ext_resource type="Script" uid="uid://eqbgi1ivjubu" path="res://scenes/weather_controller.gd" id="3_35dp5"]
+[ext_resource type="Script" uid="uid://eqbgi1ivjubu" path="res://scripts/weather_controller.gd" id="3_35dp5"]
 [ext_resource type="Texture2D" uid="uid://b0ue0u51mrcee" path="res://assets/sprites/tileset1-16.png" id="4_6q4is"]
 [ext_resource type="Texture2D" uid="uid://b5y1xmqsve0qm" path="res://assets/sprites/chests.png" id="5_mfbx6"]
 [ext_resource type="Texture2D" uid="uid://cijr3fhconx3u" path="res://assets/sprites/objects.png" id="6_acfx3"]
 [ext_resource type="Texture2D" uid="uid://dq5scqnc74m2l" path="res://assets/sprites/torch.png" id="7_0s7no"]
-[ext_resource type="Script" uid="uid://nru1k5ffi78q" path="res://scenes/atmosphere_controller.gd" id="8_blo3p"]
+[ext_resource type="Script" uid="uid://nru1k5ffi78q" path="res://scripts/atmosphere_controller.gd" id="8_blo3p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_56nkt"]
 shader = ExtResource("2_20eqo")

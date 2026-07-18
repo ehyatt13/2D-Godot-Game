@@ -5,7 +5,6 @@ extends CanvasLayer
 @onready var options_btn: Button = $CenterContainer/MenuFrame/MarginContainer/VBoxContainer/OptionsButton
 @onready var exit_btn: Button = $CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ExitButton
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visible = false
 	
@@ -22,7 +21,6 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		# Safety Lock: If your main Inventory PauseMenu is currently open, ignore this call
 		var main_pause = get_tree().get_first_node_in_group("PauseMenu")
 		if main_pause and main_pause.visible: return
 		
@@ -56,19 +54,17 @@ func _on_exit_pressed() -> void:
 	print("Select Menu: Exit to Title requested. (To be implemented later)")
 
 func _on_button_focused(btn_node: Button) -> void:
-	# Instantiate our customized, nested blue outline frame overlay dynamically [A]
 	var blue_border: ReferenceRect = ReferenceRect.new()
 	blue_border.name = "ActiveSelectBorder"
-	blue_border.border_color = Color(0.1, 0.6, 1.0, 1.0) # Vibrant Retro Cyan Blue
+	blue_border.border_color = Color(0.1, 0.6, 1.0, 1.0)
 	blue_border.border_width = 1.5
 	blue_border.editor_only = false
 	blue_border.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	blue_border.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	
-	# Nest the blue box inside your button boundaries cleanly [A]
 	btn_node.add_child(blue_border)
 
 func _on_button_focus_lost(btn_node: Button) -> void:
 	var old_border = btn_node.get_node_or_null("ActiveSelectBorder")
 	if old_border:
-		old_border.queue_free() # Safely flush the border frame from RAM memory [A]
+		old_border.queue_free()

@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://08g3ynpf77yh" path="res://scenes/item_pickup.tscn" id="5_2lupc"]
 [ext_resource type="PackedScene" uid="uid://bq6d3jb2gadow" path="res://scenes/level_exit.tscn" id="6_5p5iq"]
 [ext_resource type="PackedScene" uid="uid://by7n2my30ogas" path="res://scenes/enemy_slime.tscn" id="6_77bd2"]
+[ext_resource type="PackedScene" uid="uid://bgieyctfd5cea" path="res://scenes/spawner.tscn" id="7_514jj"]
 [ext_resource type="Shader" uid="uid://bqq0jfedishh1" path="res://scenes/test_island_level.gdshader" id="7_w8l34"]
 [ext_resource type="PackedScene" uid="uid://bjqna6o8x1ssf" path="res://scenes/breakable_rock.tscn" id="9_xjp0m"]
 [ext_resource type="PackedScene" uid="uid://cgc2lb20c5aij" path="res://scenes/breakable_bush.tscn" id="10_eo2a4"]
@@ -81,6 +82,10 @@ item_quantity = 5
 [node name="DoorTransition" parent="Interactables/DoorTransitions" parent_id_path=PackedInt32Array(46272831) index="0" unique_id=1891565103 instance=ExtResource("12_0anr6")]
 position = Vector2(144, -56)
 
+[node name="Spawner" parent="Interactables/Hazards" parent_id_path=PackedInt32Array(671866508) index="0" unique_id=1690675712 instance=ExtResource("7_514jj")]
+position = Vector2(-88, -136)
+enemy_prefab_to_spawn = ExtResource("6_77bd2")
+
 [node name="LevelExit" parent="Interactables/LevelExits" parent_id_path=PackedInt32Array(688496339) index="0" unique_id=1439442201 instance=ExtResource("6_5p5iq")]
 position = Vector2(184, -40)
 target_level_path = "uid://xu1n23okxv7k"
@@ -109,6 +114,3 @@ pickup_unique_id = "free_potion"
 
 [node name="Enemies" parent="Entities" parent_id_path=PackedInt32Array(1605357488) index="2" unique_id=297979607]
 y_sort_enabled = true
-
-[node name="EnemySlime" parent="Entities/Enemies" index="0" unique_id=1678480407 instance=ExtResource("6_77bd2")]
-position = Vector2(-88, -120)

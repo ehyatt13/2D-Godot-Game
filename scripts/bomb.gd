@@ -29,6 +29,8 @@ func trigger_explosion() -> void:
 	for body in hit_bodies:
 		if body.has_method("take_damage"):
 			body.take_damage(1)
+		elif body.has_method("take_damage_via_bomb"):
+			body.take_damage_via_bomb()
 	_detect_and_blast_puzzle_tiles()
 	await get_tree().create_timer(0.25).timeout
 	queue_free()

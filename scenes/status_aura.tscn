@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://04aopp8ywa8j"]
 
 [ext_resource type="Texture2D" uid="uid://drhno382i86ru" path="res://assets/sprites/circle_glow_particle.png" id="1_f6q1l"]
-[ext_resource type="Script" uid="uid://d00cqli6tuxaj" path="res://scenes/status_aura.gd" id="2_nagjg"]
+[ext_resource type="Script" uid="uid://d00cqli6tuxaj" path="res://scripts/status_aura.gd" id="2_nagjg"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sj5e7"]
 blend_mode = 1

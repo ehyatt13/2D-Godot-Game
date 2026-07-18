@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bgieyctfd5cea"]
+
+[ext_resource type="Texture2D" uid="uid://cijr3fhconx3u" path="res://assets/sprites/objects.png" id="1_2vbf6"]
+[ext_resource type="Script" uid="uid://bu1ulte82ayq3" path="res://scenes/spawner.gd" id="1_ik2nu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sj5e7"]
+size = Vector2(16, 16)
+
+[node name="Spawner" type="StaticBody2D" unique_id=1690675712]
+y_sort_enabled = true
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_ik2nu")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=325215124]
+y_sort_enabled = true
+texture = ExtResource("1_2vbf6")
+hframes = 5
+vframes = 5
+frame = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1415283933]
+shape = SubResource("RectangleShape2D_sj5e7")
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=368477262]
+wait_time = 4.0
+autostart = true
+
+[node name="SpawnPoint" type="Node2D" parent="." unique_id=284981416]
+position = Vector2(0, 16)

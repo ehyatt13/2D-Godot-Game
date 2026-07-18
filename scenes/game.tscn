@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://xkp607am3hcy"]
 
-[ext_resource type="Script" uid="uid://3jli701nw2sb" path="res://scenes/GameManager.gd" id="1_0tnpc"]
+[ext_resource type="Script" uid="uid://3jli701nw2sb" path="res://scripts/GameManager.gd" id="1_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://6ft4llukhjlu" path="res://scenes/pause_menu.tscn" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bxa1ayf4xdyjv" path="res://scenes/heart_ui.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://cog7o4xfgoi5o" path="res://scenes/coin_hud.tscn" id="4_lbhrr"]
@@ -42,7 +42,7 @@ layer = 2
 
 [node name="PauseMenu" parent="InventoryCanvas" unique_id=1886712646 groups=["PauseMenu"] instance=ExtResource("2_yqjtg")]
 
-[node name="SelectMenu" parent="." unique_id=1744639701 instance=ExtResource("7_u5sy4")]
+[node name="SelectMenu" parent="." unique_id=1744639701 groups=["SelectMenu"] instance=ExtResource("7_u5sy4")]
 layer = 3
 
 [node name="TransitionOverlay" parent="." unique_id=1726820661 groups=["TransitionEngine"] instance=ExtResource("5_p57ef")]

@@ -38,6 +38,7 @@ window/snap/snap_2d_transforms_to_pixel=false
 TransitionEngine=""
 Player=""
 PauseMenu=""
+SelectMenu=""
 
 [input]
 

@@ -17,6 +17,9 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause_game"):
+		var select_menu = get_tree().get_first_node_in_group("SelectMenu")
+		if select_menu and select_menu.visible: return
+		
 		get_viewport().set_input_as_handled()
 		toggle_pause()
 
