@@ -5,14 +5,19 @@ extends Node2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var blast_zone: Area2D = $ExplosionRadius
 
+var explosion_scale: float = 1.6
+#var temp_radius = 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	anim_player.play("fuse_tick")
 
 func trigger_explosion() -> void:
 	print("BOOM!")
-	sprite.scale = Vector2(1.3, 1.3)
-	blast_zone.scale = Vector2(1.3, 1.3)
+	
+	sprite.scale = Vector2(explosion_scale, explosion_scale)
+	$ExplosionRadius/CollisionShape2D.shape.radius *= explosion_scale
+	#blast_zone.scale = Vector2(1.6, 1.6)
 	
 	var root_node = get_tree().root
 	var game_manager = root_node.get_node_or_null("Game")
@@ -46,8 +51,10 @@ func _detect_and_blast_puzzle_tiles() -> void:
 		var collision_shape_node = $ExplosionRadius/CollisionShape2D
 		if collision_shape_node and collision_shape_node.shape is CircleShape2D:
 			var radius: float = collision_shape_node.shape.radius
+			print(radius)
 			var center_map_pos: Vector2i = walls_layer.local_to_map(blast_zone.global_position)
 			var tile_range_limit: int = ceil(radius / 16.0) + 1
+			print(tile_range_limit)
 			
 			for x_offset in range(-tile_range_limit, tile_range_limit + 1):
 				for y_offset in range(-tile_range_limit, tile_range_limit + 1):
@@ -56,6 +63,6 @@ func _detect_and_blast_puzzle_tiles() -> void:
 					if global_position.distance_to(cell_world_pos) <= radius:
 						impacted_cells.append(test_cell)
 		
-		#print(impacted_cells)
+		print(impacted_cells)
 		if not impacted_cells.is_empty():
 			active_map.shatter_tile_via_bomb(impacted_cells)
