@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://bwb8aoluwmqin"]
+
+[ext_resource type="Script" uid="uid://cearpju5kvdj6" path="res://scenes/shop_item_row.gd" id="1_kct4a"]
+[ext_resource type="Texture2D" uid="uid://cijr3fhconx3u" path="res://assets/sprites/objects.png" id="1_v3lci"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sj5e7"]
+atlas = ExtResource("1_v3lci")
+region = Rect2(32, 0, 16, 16)
+
+[node name="ShopItemRow" type="Button" unique_id=660950936]
+custom_minimum_size = Vector2(160, 32)
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_kct4a")
+
+[node name="BtnLayout" type="HBoxContainer" parent="." unique_id=1599255526]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="ItemIcon" type="TextureRect" parent="BtnLayout" unique_id=2142643288]
+layout_mode = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="QuantityText" type="Label" parent="BtnLayout" unique_id=59606091]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="BtnLayout" unique_id=882665198]
+layout_mode = 2
+text = "|"
+
+[node name="CostIcon" type="TextureRect" parent="BtnLayout" unique_id=2100288639]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_sj5e7")
+stretch_mode = 5
+
+[node name="CostText" type="Label" parent="BtnLayout" unique_id=2043360303]
+layout_mode = 2

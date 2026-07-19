@@ -112,6 +112,8 @@ func _refresh_menu_display() -> void:
 			ammo_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 			ammo_label.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
 			ammo_label.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+			ammo_label.offset_bottom -= 2
+			ammo_label.offset_right -= 2
 			
 			item_slot.add_child(ammo_label)
 		

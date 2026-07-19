@@ -14,12 +14,25 @@
 [ext_resource type="PackedScene" uid="uid://cgc2lb20c5aij" path="res://scenes/breakable_bush.tscn" id="10_eo2a4"]
 [ext_resource type="PackedScene" uid="uid://cnj6dgqwlpnqj" path="res://scenes/door_transition.tscn" id="12_0anr6"]
 [ext_resource type="PackedScene" uid="uid://dagc2m8vurwpa" path="res://scenes/merchant.tscn" id="14_hbcph"]
+[ext_resource type="Script" uid="uid://tbtyijcdhdxf" path="res://scripts/shop_item_data.gd" id="15_0o8tb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5p5iq"]
 shader = ExtResource("7_w8l34")
 shader_parameter/fog_color = Color(0.8, 0.8, 0.85, 0.5)
 shader_parameter/speed = 20.0
 shader_parameter/fog_density = 0.02
+
+[sub_resource type="Resource" id="Resource_hbcph"]
+script = ExtResource("15_0o8tb")
+item_id = "bomb"
+quantity = 5
+cost = 15
+metadata/_custom_type_script = "uid://tbtyijcdhdxf"
+
+[sub_resource type="Resource" id="Resource_0o8tb"]
+script = ExtResource("15_0o8tb")
+item_id = "health_potion"
+metadata/_custom_type_script = "uid://tbtyijcdhdxf"
 
 [node name="TestLevel" unique_id=83210981 instance=ExtResource("1_woqpr")]
 script = ExtResource("2_6w7gs")
@@ -122,3 +135,4 @@ y_sort_enabled = true
 
 [node name="Merchant" parent="Entities/Merchants" parent_id_path=PackedInt32Array(1277632885) index="0" unique_id=1496180057 instance=ExtResource("14_hbcph")]
 position = Vector2(144.00002, -24.000008)
+merchandise_stock = Array[ExtResource("15_0o8tb")]([SubResource("Resource_hbcph"), SubResource("Resource_0o8tb")])

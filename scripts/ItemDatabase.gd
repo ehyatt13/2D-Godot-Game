@@ -138,6 +138,34 @@ static func get_item_data(id: String) -> Dictionary:
 		return ITEMS[id]
 	return {}
 
+static func get_item_visual_assets(id: String) -> Dictionary:
+	var item_data = get_item_data(id)
+	
+	if item_data:
+		var path_string: String = ""
+		var atlas: String = item_data.get("atlas", "")
+		var frame_index: int = item_data.get("frame", 0)
+		var tile_dimensions: Vector2i = item_data.get("tile_size", Vector2i(16, 16))
+		var loaded_texture: Texture2D = null
+		
+		if atlas != "":
+			path_string = ATLAS_SHEETS[atlas].get("path", "")
+		
+		if path_string != "":
+			loaded_texture = load(path_string)
+		
+		return {
+			"sheet" = loaded_texture,
+			"frame" = frame_index,
+			"tile_size" = tile_dimensions
+		}
+	
+	return {
+		"sheet": null,
+		"frame": 0,
+		"tile_size": Vector2i(16, 16)
+	}
+
 const BUSH_PARTICLES_SCENE: PackedScene = preload("res://scenes/bush_particles.tscn")
 
 func spawn_loot_drop(table_id: String, world_coordinates: Vector2) -> void:
