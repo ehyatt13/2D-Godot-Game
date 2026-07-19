@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var wallet_label: Label = $CenterContainer/MenuFrame/MarginContainer/VBoxContainer/WalletLabel
+@onready var wallet_label: Label = $CenterContainer/MenuFrame/MarginContainer/VBoxContainer/WalletHBox/WalletLabel
 @onready var buy_bomb_btn: Button = $CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ItemsHBox/BuyBombButton
 @onready var buy_heart_btn: Button = $CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ItemsHBox/BuyHeartButton
 @onready var close_btn: Button = $CenterContainer/MenuFrame/MarginContainer/VBoxContainer/CloseButton
@@ -38,7 +38,7 @@ func close_shop() -> void:
 func _update_wallet_display() -> void:
 	# Look up your player's live coin balances inside your global data autoload script
 	var current_gold = GlobalPlayerData.get("gold_coins") if "gold_coins" in GlobalPlayerData else 0
-	wallet_label.text = "Your Gold: " + str(current_gold) + "g"
+	wallet_label.text = str(current_gold)
 
 func _on_buy_bombs_pressed() -> void:
 	var current_gold = GlobalPlayerData.get("gold_coins") if "gold_coins" in GlobalPlayerData else 0
@@ -63,8 +63,9 @@ func _on_buy_heart_pressed() -> void:
 	if current_gold >= 15:
 		GlobalPlayerData.gold_coins -= 15
 		# Trigger health recovery updates straight into your core stat blocks
-		if "health" in GlobalPlayerData:
-			GlobalPlayerData.health = min(GlobalPlayerData.health + 4, GlobalPlayerData.max_health)
+		#if "health" in GlobalPlayerData:
+			#GlobalPlayerData.health = min(GlobalPlayerData.health + 4, GlobalPlayerData.max_health)
+		GlobalPlayerData.receive_item("heart_potion", 1)
 			
 		print("Merchant Engine: Purchased Heart Potion. Transaction success.")
 		_update_wallet_display()

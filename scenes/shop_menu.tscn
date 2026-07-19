@@ -1,6 +1,29 @@
 [gd_scene format=3 uid="uid://c6o2jqflet4q8"]
 
 [ext_resource type="Script" uid="uid://clax7naiynqgx" path="res://scenes/shop_menu.gd" id="1_uj65v"]
+[ext_resource type="Texture2D" uid="uid://cijr3fhconx3u" path="res://assets/sprites/objects.png" id="2_76m3e"]
+[ext_resource type="Texture2D" uid="uid://dq63knsrxra0" path="res://assets/sprites/bomb.png" id="3_cql4u"]
+[ext_resource type="Texture2D" uid="uid://jmje6ed0jwyt" path="res://assets/sprites/potions.png" id="4_xw4en"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q28f4"]
+atlas = ExtResource("2_76m3e")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sj5e7"]
+atlas = ExtResource("3_cql4u")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecfns"]
+atlas = ExtResource("2_76m3e")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8h4cu"]
+atlas = ExtResource("4_xw4en")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7t50"]
+atlas = ExtResource("2_76m3e")
+region = Rect2(32, 0, 16, 16)
 
 [node name="ShopMenu" type="CanvasLayer" unique_id=830940944]
 process_mode = 3
@@ -41,21 +64,87 @@ layout_mode = 2
 text = "ISLAND MERCHANT"
 horizontal_alignment = 1
 
-[node name="WalletLabel" type="Label" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer" unique_id=1398514579]
+[node name="WalletHBox" type="HBoxContainer" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer" unique_id=261853233]
 layout_mode = 2
-text = "Your Gold: 0"
+
+[node name="CoinIcon" type="TextureRect" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer/WalletHBox" unique_id=1391495162]
+layout_mode = 2
+texture = SubResource("AtlasTexture_q28f4")
+stretch_mode = 5
+
+[node name="WalletLabel" type="Label" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer/WalletHBox" unique_id=1356034369]
+layout_mode = 2
+text = "0"
 
 [node name="ItemsHBox" type="HBoxContainer" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer" unique_id=513952317]
 layout_mode = 2
 theme_override_constants/separation = 16
 
 [node name="BuyBombButton" type="Button" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ItemsHBox" unique_id=752965972]
+custom_minimum_size = Vector2(120, 32)
 layout_mode = 2
-text = "Buy 5 Bombs (20 Coins)"
+
+[node name="BtnLayout" type="HBoxContainer" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ItemsHBox/BuyBombButton" unique_id=426082094]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ItemsHBox/BuyBombButton/BtnLayout" unique_id=207094158]
+layout_mode = 2
+texture = SubResource("AtlasTexture_sj5e7")
+stretch_mode = 5
+
+[node name="MultiplierText" type="Label" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ItemsHBox/BuyBombButton/BtnLayout" unique_id=1264324541]
+layout_mode = 2
+text = "x5"
+
+[node name="VSeparator" type="Label" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ItemsHBox/BuyBombButton/BtnLayout" unique_id=117747308]
+layout_mode = 2
+text = "|"
+
+[node name="CoinCostIcon" type="TextureRect" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ItemsHBox/BuyBombButton/BtnLayout" unique_id=506231251]
+layout_mode = 2
+texture = SubResource("AtlasTexture_ecfns")
+stretch_mode = 5
+
+[node name="CostText" type="Label" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ItemsHBox/BuyBombButton/BtnLayout" unique_id=390079901]
+layout_mode = 2
+text = "20"
 
 [node name="BuyHeartButton" type="Button" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ItemsHBox" unique_id=1028871713]
+custom_minimum_size = Vector2(120, 32)
 layout_mode = 2
-text = "Buy Heart Potion (15 Coins)"
+
+[node name="BtnLayout" type="HBoxContainer" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ItemsHBox/BuyHeartButton" unique_id=1426776176]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="PotionIcon" type="TextureRect" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ItemsHBox/BuyHeartButton/BtnLayout" unique_id=1802196094]
+layout_mode = 2
+texture = SubResource("AtlasTexture_8h4cu")
+stretch_mode = 5
+
+[node name="Separator" type="Label" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ItemsHBox/BuyHeartButton/BtnLayout" unique_id=597667208]
+layout_mode = 2
+text = "|"
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ItemsHBox/BuyHeartButton/BtnLayout" unique_id=899493289]
+layout_mode = 2
+texture = SubResource("AtlasTexture_c7t50")
+stretch_mode = 5
+
+[node name="CostText" type="Label" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ItemsHBox/BuyHeartButton/BtnLayout" unique_id=1184044521]
+layout_mode = 2
+text = "15"
 
 [node name="CloseButton" type="Button" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer" unique_id=1627409994]
 layout_mode = 2
