@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cog7o4xfgoi5o" path="res://scenes/coin_hud.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://jbn5w716sttt" path="res://scenes/transition_overlay.tscn" id="5_p57ef"]
 [ext_resource type="PackedScene" uid="uid://b0206i35iw1vf" path="res://scenes/buff_hud_panel.tscn" id="6_p57ef"]
+[ext_resource type="PackedScene" uid="uid://c6o2jqflet4q8" path="res://scenes/shop_menu.tscn" id="7_gee14"]
 [ext_resource type="PackedScene" uid="uid://vknyenxkhx77" path="res://scenes/select_menu.tscn" id="7_u5sy4"]
 
 [node name="Game" type="Node2D" unique_id=469100526]
@@ -44,5 +45,7 @@ layer = 2
 
 [node name="SelectMenu" parent="." unique_id=1744639701 groups=["SelectMenu"] instance=ExtResource("7_u5sy4")]
 layer = 3
+
+[node name="ShopMenu" parent="." unique_id=830940944 instance=ExtResource("7_gee14")]
 
 [node name="TransitionOverlay" parent="." unique_id=1726820661 groups=["TransitionEngine"] instance=ExtResource("5_p57ef")]

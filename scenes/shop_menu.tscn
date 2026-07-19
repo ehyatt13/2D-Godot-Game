@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://c6o2jqflet4q8"]
+
+[ext_resource type="Script" uid="uid://clax7naiynqgx" path="res://scenes/shop_menu.gd" id="1_uj65v"]
+
+[node name="ShopMenu" type="CanvasLayer" unique_id=830940944]
+process_mode = 3
+layer = 4
+script = ExtResource("1_uj65v")
+
+[node name="DarkOverlay" type="ColorRect" parent="." unique_id=1658742351]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.50980395)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=159524532]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuFrame" type="PanelContainer" parent="CenterContainer" unique_id=1508210753]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/MenuFrame" unique_id=1466703849]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MenuFrame/MarginContainer" unique_id=1397397788]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ShopTitle" type="Label" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer" unique_id=1528217950]
+layout_mode = 2
+text = "ISLAND MERCHANT"
+horizontal_alignment = 1
+
+[node name="WalletLabel" type="Label" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer" unique_id=1398514579]
+layout_mode = 2
+text = "Your Gold: 0"
+
+[node name="ItemsHBox" type="HBoxContainer" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer" unique_id=513952317]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="BuyBombButton" type="Button" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ItemsHBox" unique_id=752965972]
+layout_mode = 2
+text = "Buy 5 Bombs (20 Coins)"
+
+[node name="BuyHeartButton" type="Button" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ItemsHBox" unique_id=1028871713]
+layout_mode = 2
+text = "Buy Heart Potion (15 Coins)"
+
+[node name="CloseButton" type="Button" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer" unique_id=1627409994]
+layout_mode = 2
+text = "Exit Shop"

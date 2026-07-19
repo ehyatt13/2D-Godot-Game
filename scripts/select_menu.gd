@@ -20,6 +20,8 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if GlobalPlayerData.is_menu_active and not visible: return
+	
 	if event.is_action_pressed("ui_cancel"):
 		var main_pause = get_tree().get_first_node_in_group("PauseMenu")
 		if main_pause and main_pause.visible: return

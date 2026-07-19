@@ -432,5 +432,8 @@ y_sort_enabled = true
 
 [node name="Enemies" type="Node2D" parent="Entities" unique_id=297979607]
 
+[node name="Merchants" type="Node2D" parent="Entities" unique_id=1277632885]
+y_sort_enabled = true
+
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2083025762]
 script = ExtResource("9_2e8ei")

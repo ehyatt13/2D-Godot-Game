@@ -55,6 +55,8 @@ var player_speed: float:
 
 var preserved_facing_direction: Vector2 = Vector2.DOWN
 
+var is_menu_active: bool = false
+
 func apply_status_buff(buff_id: String, duration: float) -> void:
 	print("Buff Matrix: Applying '", buff_id, "' for ", duration, " seconds.")
 	

@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://cp0kxe6fmh86g"]
 
-[ext_resource type="Texture2D" uid="uid://d0t2227bm12id" path="res://assets/sprites/player.png" id="1_3kbl1"]
 [ext_resource type="Script" uid="uid://ci34vvygyttcs" path="res://scripts/player.gd" id="1_x1q6f"]
 [ext_resource type="Texture2D" uid="uid://b7r3xfdsgya4m" path="res://assets/sprites/new_player_4d.png" id="2_dqkch"]
 [ext_resource type="Script" uid="uid://bo1aweo4fku1l" path="res://scripts/flickering_light.gd" id="4_dqkch"]
@@ -18,54 +17,6 @@ width = 16
 height = 8
 fill = 1
 fill_from = Vector2(0.5, 0.5)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gvnp4"]
-atlas = ExtResource("1_3kbl1")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_baq0e"]
-atlas = ExtResource("1_3kbl1")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m55xx"]
-atlas = ExtResource("1_3kbl1")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7o7ax"]
-atlas = ExtResource("1_3kbl1")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j582q"]
-atlas = ExtResource("1_3kbl1")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_qaesu"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gvnp4")
-}],
-"loop": 1,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_baq0e")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m55xx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7o7ax")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j582q")
-}],
-"loop": 1,
-"name": &"run",
-"speed": 5.0
-}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sj5e7"]
 
@@ -318,14 +269,6 @@ offset = Vector2(0, -14)
 hframes = 4
 vframes = 4
 region_rect = Rect2(0, 0, 32, 32)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=247408379]
-visible = false
-sprite_frames = SubResource("SpriteFrames_qaesu")
-animation = &"run"
-autoplay = "default"
-frame = 1
-frame_progress = 0.486049
 
 [node name="InteractionZone" type="Area2D" parent="." unique_id=204358942]
 scale = Vector2(0.99999994, 0.99999994)

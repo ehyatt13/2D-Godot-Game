@@ -20,6 +20,8 @@ enum DIRECTIONS {
 ## Adjust the spawning frequency directly per instance (e.g. 4.0 seconds) [A]
 @export var spawn_cooldown_seconds: float = 4.0
 
+@export var enabled: bool = true
+
 @onready var spawn_point: Node2D = $SpawnPoint
 @onready var spawn_timer: Timer = $SpawnTimer
 
@@ -45,6 +47,7 @@ func _ready() -> void:
 			$SpawnPoint.position = Vector2(-16.0, 0.0)
 
 func _on_spawn_timer_tick() -> void:
+	if not enabled: return
 	var active_living_entities: Array[CharacterBody2D] = []
 	for entity in spawned_entities_tracker:
 		if is_instance_valid(entity) and not entity.is_queued_for_deletion():

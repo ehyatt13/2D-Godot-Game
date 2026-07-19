@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dagc2m8vurwpa"]
+
+[ext_resource type="Script" uid="uid://k575wlu41tvp" path="res://scenes/merchant.gd" id="1_12ke4"]
+[ext_resource type="Texture2D" uid="uid://c4hj37su60ng7" path="res://assets/sprites/merchant.png" id="1_v18v5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sj5e7"]
+size = Vector2(15, 18)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sj5e7"]
+radius = 13.0
+
+[node name="Merchant" type="StaticBody2D" unique_id=1496180057]
+y_sort_enabled = true
+scale = Vector2(0.7, 0.7)
+collision_layer = 8
+script = ExtResource("1_12ke4")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=621799199]
+y_sort_enabled = true
+texture = ExtResource("1_v18v5")
+offset = Vector2(0, -14)
+hframes = 4
+vframes = 4
+frame = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1126591068]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_sj5e7")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=534692637]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=638684432]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_sj5e7")

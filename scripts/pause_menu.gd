@@ -16,6 +16,8 @@ func _ready() -> void:
 	GlobalPlayerData.coins_changed.connect(func(_amt): _refresh_menu_display())
 
 func _input(event: InputEvent) -> void:
+	if GlobalPlayerData.is_menu_active and not visible: return
+	
 	if event.is_action_pressed("pause_game"):
 		var select_menu = get_tree().get_first_node_in_group("SelectMenu")
 		if select_menu and select_menu.visible: return

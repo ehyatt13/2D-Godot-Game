@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bjqna6o8x1ssf" path="res://scenes/breakable_rock.tscn" id="9_xjp0m"]
 [ext_resource type="PackedScene" uid="uid://cgc2lb20c5aij" path="res://scenes/breakable_bush.tscn" id="10_eo2a4"]
 [ext_resource type="PackedScene" uid="uid://cnj6dgqwlpnqj" path="res://scenes/door_transition.tscn" id="12_0anr6"]
+[ext_resource type="PackedScene" uid="uid://dagc2m8vurwpa" path="res://scenes/merchant.tscn" id="14_hbcph"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5p5iq"]
 shader = ExtResource("7_w8l34")
@@ -85,6 +86,7 @@ position = Vector2(144, -56)
 [node name="Spawner" parent="Interactables/Hazards" parent_id_path=PackedInt32Array(671866508) index="0" unique_id=1690675712 instance=ExtResource("7_514jj")]
 position = Vector2(-88, -136)
 enemy_prefab_to_spawn = ExtResource("6_77bd2")
+enabled = false
 
 [node name="LevelExit" parent="Interactables/LevelExits" parent_id_path=PackedInt32Array(688496339) index="0" unique_id=1439442201 instance=ExtResource("6_5p5iq")]
 position = Vector2(184, -40)
@@ -98,10 +100,13 @@ position = Vector2(80, 0)
 position = Vector2(32, -32)
 switch_unique_id = "test_switch"
 
-[node name="Torch" parent="Entities/Torches" parent_id_path=PackedInt32Array(1307406241) index="0" unique_id=132525163 instance=ExtResource("4_w8l34")]
+[node name="Torches" parent="Entities" parent_id_path=PackedInt32Array(1605357488) index="0" unique_id=1307406241]
+visible = false
+
+[node name="Torch" parent="Entities/Torches" index="0" unique_id=132525163 instance=ExtResource("4_w8l34")]
 position = Vector2(8, -48)
 
-[node name="Torch2" parent="Entities/Torches" parent_id_path=PackedInt32Array(1307406241) index="1" unique_id=452257070 instance=ExtResource("4_w8l34")]
+[node name="Torch2" parent="Entities/Torches" index="1" unique_id=452257070 instance=ExtResource("4_w8l34")]
 position = Vector2(136, -24)
 
 [node name="ItemPickups" parent="Entities" parent_id_path=PackedInt32Array(1605357488) index="1" unique_id=571837099]
@@ -114,3 +119,6 @@ pickup_unique_id = "free_potion"
 
 [node name="Enemies" parent="Entities" parent_id_path=PackedInt32Array(1605357488) index="2" unique_id=297979607]
 y_sort_enabled = true
+
+[node name="Merchant" parent="Entities/Merchants" parent_id_path=PackedInt32Array(1277632885) index="0" unique_id=1496180057 instance=ExtResource("14_hbcph")]
+position = Vector2(144.00002, -24.000008)
