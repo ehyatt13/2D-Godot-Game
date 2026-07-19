@@ -6,6 +6,8 @@ const ROW_PREFAB: PackedScene = preload("res://scenes/shop_item_row.tscn")
 @onready var dynamic_list: VBoxContainer = $CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ScrollContainer/DynamicList
 @onready var close_btn: Button = $CenterContainer/MenuFrame/MarginContainer/VBoxContainer/CloseButton
 
+var cached_stock_data: Dictionary = {}
+
 #var last_focused_row_index: int = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -17,6 +19,8 @@ func open_shop(merchant_title: String, stock_data: Dictionary) -> void:
 	visible = true
 	get_tree().paused = true
 	GlobalPlayerData.is_menu_active = true
+	
+	cached_stock_data = stock_data
 	
 	$CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ShopTitle.text = merchant_title
 	_update_wallet_display()
@@ -38,6 +42,7 @@ func open_shop(merchant_title: String, stock_data: Dictionary) -> void:
 			data["cost"], 
 			data["sheet"], 
 			data["frame"], 
+			data["stock"],
 			data.get("tile_size", Vector2i(16, 16)) # Default safeguard to standard 16x16 pixel blocks
 		)
 		
@@ -83,6 +88,13 @@ func _on_item_purchase_triggered(item_id: String, quantity: int, cost: int) -> v
 	
 	var current_gold = GlobalPlayerData.get("gold_coins") if "gold_coins" in GlobalPlayerData else 0
 	
+	var item_stock_record = cached_stock_data.get(item_id, null)
+	if not item_stock_record: return
+	
+	if item_stock_record["stock"] != -1 and item_stock_record["stock"] <= 0:
+		print("Shop System: Denied. Item bundle is completely sold out.")
+		return
+	
 	if current_gold >= cost:
 		GlobalPlayerData.gold_coins -= cost
 		
@@ -94,14 +106,21 @@ func _on_item_purchase_triggered(item_id: String, quantity: int, cost: int) -> v
 			## If it's a healing potion, consume immediately to update core stat gauges
 			#GlobalPlayerData.health = min(GlobalPlayerData.health + (quantity * 4), GlobalPlayerData.max_health)
 		
-		#var currently_focused_node = get_viewport().gui_get_focus_owner()
-		#if currently_focused_node and currently_focused_node.get_parent() == dynamic_list:
-			## Get its flat vertical position number inside the VBoxContainer list (e.g. index 1)
-			#last_focused_row_index = currently_focused_node.get_index()
-		#else:
-			#last_focused_row_index = 0 # Default safeguard fallback
-		
 		GlobalPlayerData.receive_item(item_id, quantity)
+		
+		if item_stock_record["stock"] != -1:
+			item_stock_record["stock"] -= 1 # Subtract 1 available stock unit from memory!
+			
+			# Dynamically update your active button row's visual text strings instantly!
+			if active_button and active_button.has_node("BtnLayout/StockLabel"):
+				var label_node = active_button.get_node("BtnLayout/StockLabel")
+				label_node.text = " (Stock: " + str(item_stock_record["stock"]) + ")"
+				
+				# If the customer just bought the absolute last remaining unit...
+				if item_stock_record["stock"] <= 0:
+					label_node.text = " (SOLD OUT)"
+					active_button.disabled = true # Turn OFF button interactions safely in real-time!
+		
 		print("Shop Purchase Success: Bought ", item_id, " x", quantity)
 		_update_wallet_display()
 		#_redraw_shop_menu_elements()
@@ -149,15 +168,25 @@ func _on_item_purchase_triggered(item_id: String, quantity: int, cost: int) -> v
 		#close_btn.grab_focus()
 
 func _on_btn_focus_gained(btn_node: Button) -> void:
-	var border: ReferenceRect = ReferenceRect.new()
-	border.name = "ActiveShopBorder"
-	border.border_color = Color(0.1, 0.6, 1.0, 1.0) # Vibrant Retro Cyan Blue
-	border.border_width = 1.5
-	border.editor_only = false
-	border.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	border.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	btn_node.add_child(border)
+	#var border: ReferenceRect = ReferenceRect.new()
+	#border.name = "ActiveShopBorder"
+	#border.border_color = Color(0.1, 0.6, 1.0, 1.0) # Vibrant Retro Cyan Blue
+	#border.border_width = 1.5
+	#border.editor_only = false
+	#border.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	#border.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	#btn_node.add_child(border)
+	
+	var custom_outline: StyleBoxFlat = StyleBoxFlat.new()
+	custom_outline.bg_color = Color(0.0, 0.0, 0.0, 0.0)
+	custom_outline.set_border_width_all(1)
+	custom_outline.border_color = Color(0.1, 0.6, 1.0, 1.0)
+	custom_outline.anti_aliasing = false # Disable anti-alias blur to protect retro pixels!
+	btn_node.add_theme_stylebox_override("focus", custom_outline)
+	btn_node.add_theme_stylebox_override("hover", custom_outline)
 
 func _on_btn_focus_lost(btn_node: Button) -> void:
-	var old_border = btn_node.get_node_or_null("ActiveShopBorder")
-	if old_border: old_border.queue_free()
+	#var old_border = btn_node.get_node_or_null("ActiveShopBorder")
+	#if old_border: old_border.queue_free()
+	btn_node.remove_theme_stylebox_override("focus")
+	btn_node.remove_theme_stylebox_override("hover")

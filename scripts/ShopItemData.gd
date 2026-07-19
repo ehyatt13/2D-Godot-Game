@@ -11,3 +11,6 @@ extends Resource
 
 ## The cost of the item bundle in gold coins
 @export var cost: int = 10
+
+## The available stock quantity for sale. Type -1 for UNLIMITED stock!
+@export var stock_available: int = -1

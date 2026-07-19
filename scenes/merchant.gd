@@ -6,23 +6,6 @@ extends StaticBody2D
 
 @export var merchandise_stock: Array[ShopItemData] = []
 
-#@export var merchandise_stock: Dictionary = {
-	#"bombs": {
-		#"qty": 5,
-		#"cost": 20,
-		#"sheet": preload("res://assets/sprites/bomb.png"), # Drag and drop icon asset textures here!
-		#"frame": 0,
-		#"tile_size": Vector2i(16, 16)
-	#},
-	#"health_potion": {
-		#"qty": 1,
-		#"cost": 15,
-		#"sheet": preload("res://assets/sprites/potions.png"),
-		#"frame": 1,
-		#"tile_size": Vector2i(16, 16)
-	#}
-#}
-
 @onready var interaction_area: Area2D = $InteractionArea
 
 func interact(_player_node: CharacterBody2D) -> void:
@@ -39,6 +22,7 @@ func interact(_player_node: CharacterBody2D) -> void:
 			payload[entry.item_id] = {
 				"qty": entry.quantity,
 				"cost": entry.cost,
+				"stock": entry.stock_available,
 				"sheet": visual_data["sheet"],
 				"frame": visual_data["frame"],
 				"tile_size": visual_data["tile_size"]

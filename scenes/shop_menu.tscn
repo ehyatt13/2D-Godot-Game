@@ -28,6 +28,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MenuFrame" type="PanelContainer" parent="CenterContainer" unique_id=1508210753]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/MenuFrame" unique_id=1466703849]
@@ -61,9 +62,11 @@ text = "0"
 [node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer" unique_id=1614406323]
 custom_minimum_size = Vector2(180, 100)
 layout_mode = 2
+horizontal_scroll_mode = 0
 
 [node name="DynamicList" type="VBoxContainer" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ScrollContainer" unique_id=1350646210]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="CloseButton" type="Button" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer" unique_id=1627409994]
 layout_mode = 2
