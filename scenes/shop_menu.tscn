@@ -7,6 +7,14 @@
 atlas = ExtResource("2_76m3e")
 region = Rect2(32, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_yd2m7"]
+atlas = ExtResource("2_76m3e")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jc4bj"]
+atlas = ExtResource("2_76m3e")
+region = Rect2(48, 0, 16, 16)
+
 [node name="ShopMenu" type="CanvasLayer" unique_id=830940944]
 process_mode = 3
 layer = 4
@@ -59,14 +67,28 @@ stretch_mode = 5
 layout_mode = 2
 text = "0"
 
+[node name="UpIndicator" type="TextureRect" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer" unique_id=780891046]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+texture = SubResource("AtlasTexture_yd2m7")
+stretch_mode = 3
+
 [node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer" unique_id=1614406323]
 custom_minimum_size = Vector2(180, 100)
 layout_mode = 2
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
 
 [node name="DynamicList" type="VBoxContainer" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ScrollContainer" unique_id=1350646210]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="DownIndicator" type="TextureRect" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer" unique_id=279922330]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+texture = SubResource("AtlasTexture_jc4bj")
+stretch_mode = 3
+flip_v = true
 
 [node name="CloseButton" type="Button" parent="CenterContainer/MenuFrame/MarginContainer/VBoxContainer" unique_id=1627409994]
 layout_mode = 2

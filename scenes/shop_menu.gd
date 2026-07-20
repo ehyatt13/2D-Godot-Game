@@ -5,6 +5,9 @@ const ROW_PREFAB: PackedScene = preload("res://scenes/shop_item_row.tscn")
 @onready var wallet_label: Label = $CenterContainer/MenuFrame/MarginContainer/VBoxContainer/WalletHBox/WalletLabel
 @onready var dynamic_list: VBoxContainer = $CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ScrollContainer/DynamicList
 @onready var close_btn: Button = $CenterContainer/MenuFrame/MarginContainer/VBoxContainer/CloseButton
+@onready var scroll_container: ScrollContainer = $CenterContainer/MenuFrame/MarginContainer/VBoxContainer/ScrollContainer
+@onready var up_indicator: TextureRect = $CenterContainer/MenuFrame/MarginContainer/VBoxContainer/UpIndicator
+@onready var down_indicator: TextureRect = $CenterContainer/MenuFrame/MarginContainer/VBoxContainer/DownIndicator
 
 var cached_stock_data: Dictionary = {}
 
@@ -71,6 +74,43 @@ func open_shop(merchant_title: String, stock_data: Dictionary) -> void:
 		buttons_built[0].grab_focus()
 	else:
 		close_btn.grab_focus()
+	
+	var v_scrollbar = scroll_container.get_v_scroll_bar()
+	if v_scrollbar:
+		# Wire up its value change signal directly to our visibility calculator function [A]
+		if not v_scrollbar.value_changed.is_connected(_evaluate_scroll_indicators):
+			v_scrollbar.value_changed.connect(_evaluate_scroll_indicators)
+	
+	await get_tree().process_frame # Wait for child nodes to settle inside RAM
+	_evaluate_scroll_indicators(scroll_container.scroll_vertical)
+
+func _evaluate_scroll_indicators(_current_scroll_value: float) -> void:
+	if not scroll_container or not up_indicator or not down_indicator: return
+	
+	var current_scroll: int = scroll_container.scroll_vertical
+	var max_scroll_limit: int = scroll_container.get_v_scroll_bar().max_value - scroll_container.size.y
+	
+	# --- 1. THE CEILING CHECK (UP ARROW) ---
+	# If our scroll coordinate is greater than 0, there are items hidden ABOVE us!
+	if current_scroll > 2:
+		# Flash to 100% opaque visibility instantly!
+		up_indicator.modulate.a = 1.0
+	else:
+		# Turn completely transparent, but KEEP the node's layout footprint space reserved!
+		up_indicator.modulate.a = 0.0
+		
+	# --- 2. THE FLOOR CHECK (DOWN ARROW) ---
+	# If our scroll coordinate hasn't hit the absolute maximum floor cap, there are items BELOW us!
+	if current_scroll < (max_scroll_limit - 2):
+		down_indicator.modulate.a = 1.0
+	else:
+		down_indicator.modulate.a = 0.0
+		
+	# --- 3. THE NO-SCROLL SAFETY SHIELD ---
+	# If the merchant only has 2 items and the list doesn't overflow the box size at all, hide both!
+	if scroll_container.get_v_scroll_bar().max_value <= scroll_container.size.y:
+		up_indicator.modulate.a = 0.0
+		down_indicator.modulate.a = 0.0
 
 func close_shop() -> void:
 	visible = false
@@ -184,6 +224,32 @@ func _on_btn_focus_gained(btn_node: Button) -> void:
 	custom_outline.anti_aliasing = false # Disable anti-alias blur to protect retro pixels!
 	btn_node.add_theme_stylebox_override("focus", custom_outline)
 	btn_node.add_theme_stylebox_override("hover", custom_outline)
+	
+	if scroll_container and btn_node.get_parent() == dynamic_list:
+		# Small safe delay timer pass to let Godot finish painting the current layout frames
+		await get_tree().process_frame
+		
+		# Fetch the active vertical scrollbar node from the controller server
+		var v_scrollbar = scroll_container.get_v_scroll_bar()
+		if v_scrollbar:
+			# Calculate how far down the button sits relative to the container view window
+			var item_top_y: float = btn_node.position.y
+			var item_bottom_y: float = item_top_y + btn_node.size.y
+			
+			var current_scroll_top: float = scroll_container.scroll_vertical
+			var current_view_height: float = scroll_container.size.y
+			
+			# SCROLL OVERFLOW CHECK:
+			# If the button is sneaking off the bottom edge of the display container box...
+			if item_bottom_y > (current_scroll_top + current_view_height):
+				# Smoothly slide the scrollbar down so the item stays perfectly inside the window frame!
+				scroll_container.scroll_vertical = item_bottom_y - current_view_height
+				
+			# SCROLL UNDERFLOW CHECK:
+			# If the player is scrolling back UP and the button hits the ceiling edge...
+			elif item_top_y < current_scroll_top:
+				# Smoothly slide the scrollbar upward to reveal the higher row entries!
+				scroll_container.scroll_vertical = item_top_y
 
 func _on_btn_focus_lost(btn_node: Button) -> void:
 	#var old_border = btn_node.get_node_or_null("ActiveShopBorder")

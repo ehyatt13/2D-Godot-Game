@@ -32,8 +32,21 @@ metadata/_custom_type_script = "uid://tbtyijcdhdxf"
 [sub_resource type="Resource" id="Resource_0o8tb"]
 script = ExtResource("15_0o8tb")
 item_id = "health_potion"
-cost = 0
+cost = 100
 stock_available = 2
+metadata/_custom_type_script = "uid://tbtyijcdhdxf"
+
+[sub_resource type="Resource" id="Resource_vitm7"]
+script = ExtResource("15_0o8tb")
+item_id = "gold_coin"
+cost = 5
+metadata/_custom_type_script = "uid://tbtyijcdhdxf"
+
+[sub_resource type="Resource" id="Resource_k6qcx"]
+script = ExtResource("15_0o8tb")
+item_id = "magic_torch"
+cost = 100
+stock_available = 1
 metadata/_custom_type_script = "uid://tbtyijcdhdxf"
 
 [node name="TestLevel" unique_id=83210981 instance=ExtResource("1_woqpr")]
@@ -138,4 +151,4 @@ y_sort_enabled = true
 [node name="Merchant" parent="Entities/Merchants" parent_id_path=PackedInt32Array(1277632885) index="0" unique_id=1496180057 instance=ExtResource("14_hbcph")]
 position = Vector2(144.00002, -24.000008)
 shop_display_title = "TEST OUTPOST"
-merchandise_stock = Array[ExtResource("15_0o8tb")]([SubResource("Resource_hbcph"), SubResource("Resource_0o8tb")])
+merchandise_stock = Array[ExtResource("15_0o8tb")]([SubResource("Resource_hbcph"), SubResource("Resource_0o8tb"), SubResource("Resource_vitm7"), SubResource("Resource_k6qcx")])

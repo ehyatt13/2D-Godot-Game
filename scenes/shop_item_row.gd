@@ -9,9 +9,9 @@ var current_cost: int = 0
 var current_stock: int = -1
 @onready var stock_label: Label = $BtnLayout/StockLabel
 
-@onready var item_icon: TextureRect = $BtnLayout/ItemIcon
-@onready var quantity_text: Label = $BtnLayout/QuantityText
-@onready var cost_text: Label = $BtnLayout/CostText
+@onready var item_icon: TextureRect = $BtnLayout/ItemHBoxLeft/ItemIcon
+@onready var quantity_text: Label = $BtnLayout/ItemHBoxLeft/QuantityText
+@onready var cost_text: Label = $BtnLayout/PriceRightHBox/CostText
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -8,7 +8,7 @@ atlas = ExtResource("1_v3lci")
 region = Rect2(32, 0, 16, 16)
 
 [node name="ShopItemRow" type="Button" unique_id=660950936]
-custom_minimum_size = Vector2(180, 32)
+custom_minimum_size = Vector2(0, 32)
 offset_right = 8.0
 offset_bottom = 8.0
 size_flags_horizontal = 3
@@ -22,33 +22,45 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 6
 alignment = 1
 
-[node name="ItemIcon" type="TextureRect" parent="BtnLayout" unique_id=2142643288]
+[node name="ItemHBoxLeft" type="HBoxContainer" parent="BtnLayout" unique_id=1793594804]
+layout_mode = 2
+
+[node name="ItemIcon" type="TextureRect" parent="BtnLayout/ItemHBoxLeft" unique_id=2142643288]
 layout_mode = 2
 mouse_filter = 2
 stretch_mode = 5
 
-[node name="QuantityText" type="Label" parent="BtnLayout" unique_id=59606091]
+[node name="QuantityText" type="Label" parent="BtnLayout/ItemHBoxLeft" unique_id=59606091]
 layout_mode = 2
 
-[node name="Spacer" type="Control" parent="BtnLayout" unique_id=1520875918]
+[node name="MiddleSpacer" type="Control" parent="BtnLayout" unique_id=1520875918]
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="StockLabel" type="Label" parent="BtnLayout" unique_id=937775849]
 layout_mode = 2
 
-[node name="Separator" type="Label" parent="BtnLayout" unique_id=882665198]
+[node name="RightSpacer" type="Control" parent="BtnLayout" unique_id=1013978791]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PriceRightHBox" type="HBoxContainer" parent="BtnLayout" unique_id=763460734]
+layout_mode = 2
+
+[node name="Separator" type="Label" parent="BtnLayout/PriceRightHBox" unique_id=882665198]
 layout_mode = 2
 text = "|"
 
-[node name="CostIcon" type="TextureRect" parent="BtnLayout" unique_id=2100288639]
+[node name="CostIcon" type="TextureRect" parent="BtnLayout/PriceRightHBox" unique_id=2100288639]
 layout_mode = 2
 mouse_filter = 2
 texture = SubResource("AtlasTexture_sj5e7")
 stretch_mode = 5
 
-[node name="CostText" type="Label" parent="BtnLayout" unique_id=2043360303]
+[node name="CostText" type="Label" parent="BtnLayout/PriceRightHBox" unique_id=2043360303]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
+horizontal_alignment = 2
